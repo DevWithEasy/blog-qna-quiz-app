@@ -1,0 +1,15 @@
+@import "tailwindcss/base";
+@import "./index.css";
+
+@import "tailwindcss/components";
+
+
+@import "tailwindcss/utilities";
+
+@font-face {
+    font-family: 'Tiro Bangla';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/tirobangla/v6/IFSgHe1Tm95E3O8b5i2V8PGo80Luuw.woff2) format('woff2');
+    unicode-range: U+0964-0965, U+0981-09FB, U+200C-200D, U+20B9, U+25CC;
+}
