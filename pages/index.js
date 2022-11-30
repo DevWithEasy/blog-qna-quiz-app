@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 export default function Index() {
     const user = useSelector(state=>state.auth.user)
     const router = useRouter()
-    if(!user.uid){
+    if(!user.id){
         router.push('/login')
     }
-    if(user.uid){
+    if(user.id){
         router.push('/quiz')
     }
 }

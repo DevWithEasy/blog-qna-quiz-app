@@ -3,8 +3,7 @@ import { db } from "../../../utils/firebase";
 
 export default async function handler(req,res){
     try {
-        const colRef = collection(db,'users');
-        
+        const colRef = collection(db,'categories');
         await addDoc(colRef,{name : req.body.name})
         res.status(200).json({
             success : true,
@@ -18,4 +17,4 @@ export default async function handler(req,res){
             message : 'Add Failed'
         })
     }
-}
+} 

@@ -1,13 +1,35 @@
 import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../utils/firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { auth, db, provider } from "../utils/firebase";
 
-export default function login(router,dispatch,action){
-    signInWithPopup(auth,provider)
-    .then(res=>{
-        dispatch(action(res.user))
-        router.push('/')
-    })
-    .catch(error=>{
+export default async function login(router,dispatch,action){
+    try {
+        signInWithPopup(auth,provider)
+        .then(async(res)=>{
+            const docRef= doc(db,'users',res.user.uid)
+            const user = await getDoc(docRef);
+
+            if (user.exists()) {
+                dispatch(action(user.data()))
+                router.push('/')
+            } else {
+                await setDoc (doc(db,'users',res.user.uid),{
+                    id : res.user.uid,
+                    name : res.user.displayName,
+                    email : 'hello',
+                    image : res.user.photoURL,
+                    joinQuizes : [],
+                    scores :  []
+                })
+                const user = await getDoc(docRef);
+                dispatch(action(user.data()))
+                router.push('/')
+            }
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+    } catch (error) {
         console.log(error)
-    })
+    }
 }

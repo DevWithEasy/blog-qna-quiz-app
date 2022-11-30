@@ -1,6 +1,6 @@
-export default function restartQuiz(setName,setStart,setResult,setCurrentQuestion){
+export default function restartQuiz(setStart,setScore,setResult,setCurrentQuestion){
     setStart(false)
     setResult(false)
     setCurrentQuestion(0)
-    setName('')
+    setScore(0)
 }

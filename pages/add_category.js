@@ -1,12 +1,12 @@
 import { useState } from "react"
-import addSubject from "../libs/addSubject"
+import addCategory from "../libs/addCategory"
 
-export default function AddSubject(){
+export default function AddCategory(){
     const [name,setName] = useState('')
     return(
         <div>
             <input type="text" placeholder="subject name" onChange={(e)=>setName(e.target.value)}/>
-            <button onClick={()=>addSubject(name)}>Add</button>
+            <button onClick={()=>addCategory(name)}>যোগ করুন</button>
         </div>
     )
 }

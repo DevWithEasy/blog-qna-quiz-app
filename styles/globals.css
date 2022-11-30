@@ -1,6 +1,7 @@
 @import "tailwindcss/base";
-@import "./index.css";
+@import "./quiz.css";
 @import "./login.css";
+@import "./header.css";
 
 @import "tailwindcss/components";
 

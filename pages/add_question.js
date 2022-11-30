@@ -1,8 +1,15 @@
+import { useEffect } from "react"
 import { useState } from "react"
-import addSubject from "../libs/addSubject"
+import addAnswer from "../libs/addAnswer"
+import addQuestion from "../libs/addQuestion"
+import getAllCategory from "../libs/getAllCategory"
+import handleInput from "../libs/handleInput"
+import removeAnswer from "../libs/removeAnswer"
 
 export default function AddQuestion(){
+    const [categories,setCategories] = useState([])
     const [question,setQuestion] = useState({
+        category : '',
         question: '',
         answers : []
     })
@@ -10,43 +17,34 @@ export default function AddQuestion(){
         answer: '',
         isCorrect: false
     })
-    function inputHandle(e,value,setValue){
-        const newValue = {...value}
-        newValue[e.target.name] = e.target.value
-        setValue(newValue)
-    }
-    function addAnswer(option,setOption,value,setValue){
-        if(value.answers.length < 4){
-            const newValue = {...value}
-            newValue.answers.push(option)
-            setValue(newValue)
-            setOption({
-                answer: '',
-                isCorrect: false
-        })
-        }else{
-            alert('সর্বোচ্চ চারটি উত্তর যোগ করা যাবে। আপনি চারটি যোগ করে ফেলেছেন।')
-        }
-    }
+    useEffect(()=>{
+        getAllCategory(setCategories)
+    },[])
     return(
         <div>
-            <input type="text" name="question" placeholder="subject name" onChange={(e)=>inputHandle(e,question,setQuestion)}/>
+            <select name="category" value={question.category} onChange={(e)=>handleInput(e,question,setQuestion)}>
+                <option value="">প্রশ্ন বিভাগ বাছাই করুন</option>
+                {
+                    categories.length > 0 && categories.map((category,i)=><option key={i} value={category.name}>{category.name}</option>)
+                }
+            </select>
+            <input type="text" name="question" value={question.question} placeholder="এখানে প্রশ্নটি লিখুন" onChange={(e)=>handleInput(e,question,setQuestion)}/>
             <div className="">
                 {question.answers.length > 0 && question.answers.map((answer,i)=><p key={i}>
                     <span>ঊত্তর  : {answer.answer}</span>
-                    <span>সঠিক : {answer.isCorrect}</span> 
-                    <button>x</button>
+                    <span>মান : {answer.isCorrect ? 'সঠিক' : 'ভুল'}</span> 
+                    <button onClick={()=>removeAnswer(i,question,setQuestion)}>x</button>
                 </p>)}
             </div>
-            <div>
-                <input type="text" name="answer" placeholder="answer" value={option.answer} onChange={(e)=>inputHandle(e,option,setOption)}/>
-                <select name="isCorrect" value={option.isCorrect} onChange={(e)=>inputHandle(e,option,setOption)}>
-                    <option value='false'>False</option>
-                    <option value='true'>True</option>
+            {question.answers.length < 4 && <div>
+                <input type="text" name="answer" placeholder="এখানে উত্তরটি লিখুন" value={option.answer} onChange={(e)=>handleInput(e,option,setOption)}/>
+                <select name="isCorrect" value={option.isCorrect} onChange={(e)=>handleInput(e,option,setOption)}>
+                    <option value='false'>ভুল</option>
+                    <option value='true'>সঠিক</option>
                 </select>
-                <button onClick={()=>addAnswer(option,setOption,question,setQuestion)}>Add</button>
-            </div>
-            
+                <button onClick={()=>addAnswer(option,setOption,question,setQuestion)}>+</button>
+            </div>}
+            <button onClick={()=>addQuestion(question,setQuestion)}>যোগ করুন</button>
         </div>
     )
 }

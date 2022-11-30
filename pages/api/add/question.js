@@ -3,8 +3,8 @@ import { db } from "../../../utils/firebase";
 
 export default async function handler(req,res){
     try {
-        const colRef = collection(db,'subjects');
-        await addDoc(colRef,{name : req.body.name})
+        const colRef = collection(db,'questions');
+        await addDoc(colRef,req.body)
         res.status(200).json({
             success : true,
             status : 200,
