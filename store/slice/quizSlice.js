@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const quizSlice = createSlice({
     name: 'quiz',
     initialState: {
-        name: '',
+        subject: '',
         score : 0 
     },
     reducers: {
-        name:(state,action)=>{
-            state.name = action.payload;
+        addSubject:(state,action)=>{
+            state.subject = action.payload;
         },
         totalScore:(state,action)=>{
             state.score = action.payload;
