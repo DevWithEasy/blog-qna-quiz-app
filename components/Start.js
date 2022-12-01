@@ -8,7 +8,6 @@ export default function Start({setStart}){
           <div className="">
                 <p>আপনি কুইজের বিষয় পছন্দ করেছেন:</p>
                 <p className="subject">{quiz.subject}</p>
-            
                 <br />
                 <button onClick={() => startQuiz(setStart)}>শুরু করুন</button>
           </div>

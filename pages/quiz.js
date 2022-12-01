@@ -29,13 +29,13 @@ export default function Quiz() {
           <div className="question">
             <h1>
               <span className='text-2xl pr-4'>Question</span>
-              <span className='text-2xl'>{currentQuestion}</span>/
+              <span className='text-xl'>{currentQuestion + 1}</span>/
               <span>{questions.length}</span>
             </h1>
             <p>{questions[currentQuestion]?.question}</p>
           </div>
           <div className="answer">
-            <p className="text-center text-xl">আপনার উত্তর টি খুজুনঃ</p>
+            <p className="">আপনার উত্তর টি খুজুনঃ</p>
             {
               questions[currentQuestion].answers.map((answer,i)=><button key={i} onClick={()=>submitAnswer(answer.isCorrect,questions,currentQuestion,setCurrentQuestion,setResult,score,setScore)}>{answer.answer}</button>)
             }
