@@ -17,6 +17,7 @@ export default function Quiz() {
   useEffect(()=>{
     getAllQuestion(setQuestions)
   },[])
+  console.log(questions)
   return (
       <div className='quiz'>
         {/* start quiz component  */}

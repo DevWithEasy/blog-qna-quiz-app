@@ -2,6 +2,7 @@
 @import "./quiz.css";
 @import "./login.css";
 @import "./header.css";
+@import "./add_question.css";
 
 @import "tailwindcss/components";
 
