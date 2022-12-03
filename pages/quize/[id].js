@@ -1,12 +1,14 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import Result from '../components/Result';
-import Start from '../components/Start';
-import getAllQuestion from '../libs/getAllQuestion';
-import submitAnswer from '../libs/submitAnswer';
+import Result from '../../components/Result';
+import Start from '../../components/Start';
+import getAllQuestion from '../../libs/getAllQuestion';
+import submitAnswer from '../../libs/submitAnswer';
 
 export default function Quiz() {
+  const router = useRouter()
   const user = useSelector(state=>state.auth.user)
   const quiz = useSelector(state=>state.quiz)
   const [start,setStart] = useState(false)
@@ -15,9 +17,9 @@ export default function Quiz() {
   const [currentQuestion,setCurrentQuestion] = useState(0)
   const [score,setScore] = useState(0)
   useEffect(()=>{
-    getAllQuestion(setQuestions)
-  },[])
-  console.log(questions)
+    getAllQuestion(router.query.id,setQuestions)
+  },[router.query.id])
+  console.log(questions);
   return (
       <div className='quiz'>
         {/* start quiz component  */}

@@ -1,5 +1,5 @@
 .quiz{
-    @apply flex justify-center items-center min-h-screen bg-blue-300;
+    @apply flex justify-center items-center;
     &>div{
       @apply w-full mx-4 md:w-8/12 md:h-80 p-3 bg-slate-500 text-white rounded-md shadow-md
     }

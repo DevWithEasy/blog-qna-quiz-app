@@ -1,0 +1,3 @@
+.app{
+    @apply relative min-h-screen bg-slate-200 pt-16;
+}

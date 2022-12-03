@@ -16,10 +16,9 @@ export default async function login(router,dispatch,action){
                 await setDoc (doc(db,'users',res.user.uid),{
                     id : res.user.uid,
                     name : res.user.displayName,
-                    email : 'hello',
+                    email : '',
                     image : res.user.photoURL,
                     joinQuizes : [],
-                    scores :  [],
                     type : 'user'
                 })
                 const user = await getDoc(docRef);

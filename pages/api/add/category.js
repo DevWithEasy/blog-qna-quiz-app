@@ -1,10 +1,11 @@
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../../utils/firebase";
 
 export default async function handler(req,res){
     try {
-        const colRef = collection(db,'categories');
-        await addDoc(colRef,{name : req.body.name})
+        await setDoc (doc(db,'categories',req.body.id),req.body)
+        // const colRef = collection(db,'categories');
+        // await addDoc(colRef,req.body)
         res.status(200).json({
             success : true,
             status : 200,
