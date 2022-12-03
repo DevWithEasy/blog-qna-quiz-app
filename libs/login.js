@@ -19,7 +19,8 @@ export default async function login(router,dispatch,action){
                     email : 'hello',
                     image : res.user.photoURL,
                     joinQuizes : [],
-                    scores :  []
+                    scores :  [],
+                    type : 'user'
                 })
                 const user = await getDoc(docRef);
                 dispatch(action(user.data()))

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import {v4 as uuidv4} from "uuid";
-import addCategory from "../libs/addCategory"
+import addCategory from "../libs/addCategory";
 import handleInput from "../libs/handleInput";
+
 
 export default function AddCategory(){
     const [category,setCategory] = useState({

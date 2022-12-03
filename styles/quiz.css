@@ -1,7 +1,7 @@
 .quiz{
     @apply flex justify-center items-center min-h-screen bg-blue-300;
     &>div{
-      @apply w-8/12 h-80 p-2 bg-slate-500 text-white rounded-md shadow-md
+      @apply w-full mx-4 md:w-8/12 md:h-80 p-3 bg-slate-500 text-white rounded-md shadow-md
     }
     &>.start{
       @apply flex justify-center items-center;
@@ -16,14 +16,17 @@
       }
     }
     &>.qustion_answer{
-      @apply flex ;
+      @apply md:flex space-y-5 md:space-y-0;
       &>.question{
-        @apply w-1/2
+        @apply w-1/2 space-y-2;
       }
       &>.answer{
-        @apply w-1/2 flex flex-col space-y-5;
+        @apply md:w-1/2 flex flex-col justify-center space-y-3 ;
+        &>p{
+          @apply text-center ;
+        }
         &>button{
-          @apply px-4 py-2 ring-2 rounded-full hover:bg-gray-700 transition-all duration-300 cursor-pointer;
+          @apply py-2 ring-2 rounded-full hover:bg-gray-700 transition-all duration-300 cursor-pointer;
         }
       }
     }
