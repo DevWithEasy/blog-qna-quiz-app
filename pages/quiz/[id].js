@@ -1,34 +1,33 @@
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
 import Result from '../../components/Result';
 import Start from '../../components/Start';
-import getAllQuestion from '../../libs/getAllQuestion';
-import submitAnswer from '../../libs/submitAnswer';
+import getCategoryAllData from '../../libs/getCategoryAllData';
+import { category } from '../../store/slice/quizSlice';
+
 
 export default function Quiz() {
   const router = useRouter()
-  const user = useSelector(state=>state.auth.user)
-  const quiz = useSelector(state=>state.quiz)
+  const dispatch = useDispatch ()
   const [start,setStart] = useState(false)
   const [result,setResult] = useState(false)
   const [questions,setQuestions] = useState([])
   const [currentQuestion,setCurrentQuestion] = useState(0)
   const [score,setScore] = useState(0)
   useEffect(()=>{
-    getAllQuestion(router.query.id,setQuestions)
-  },[router.query.id])
-  console.log(questions);
+    getCategoryAllData(router.query.id,dispatch,category,toast)
+  },[router.query.id,dispatch])
   return (
       <div className='quiz'>
         {/* start quiz component  */}
 
-        {!start && <Start setStart={setStart}/>}
+        <Start setStart={setStart}/>
 
         {/* all question and answer render */}
 
-        {start && !result && <div className="qustion_answer">
+        {/* <div className="qustion_answer">
           <div className="question">
             <h1>
               <span className='text-2xl pr-4'>Question</span>
@@ -43,13 +42,11 @@ export default function Quiz() {
               questions[currentQuestion].answers.map((answer,i)=><button key={i} onClick={()=>submitAnswer(answer.isCorrect,questions,currentQuestion,setCurrentQuestion,setResult,score,setScore)}>{answer.answer}</button>)
             }
           </div>
-        </div>}
+        </div> */}
 
         {/* result component render */}
 
-        {
-          result && <Result data={{score,setScore,setStart,setResult,setCurrentQuestion}}/>
-        }
+        <Result data={{score,setScore,setStart,setResult,setCurrentQuestion}}/>
     </div>
   )
 }

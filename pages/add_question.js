@@ -6,6 +6,7 @@ import addQuestion from "../libs/addQuestion"
 import getAllCategory from "../libs/getAllCategory"
 import handleInput from "../libs/handleInput"
 import removeAnswer from "../libs/removeAnswer"
+import toast from 'react-hot-toast';
 
 export default function AddQuestion(){
     const [categories,setCategories] = useState([])
@@ -33,6 +34,8 @@ export default function AddQuestion(){
                     }
                 </select>
                 <input type="text" name="question" value={question.question} placeholder="এখানে প্রশ্নটি লিখুন" onChange={(e)=>handleInput(e,question,setQuestion)}/>
+
+                
                 {question.answers.length>0 && <div className="answer_list">
                     {question.answers.length > 0 && question.answers.map((answer,i)=><p key={i}>
                         <span>ঊত্তর  : {answer.answer}</span>
@@ -42,6 +45,8 @@ export default function AddQuestion(){
                         <button onClick={()=>removeAnswer(i,question,setQuestion)}>x</button>
                     </p>)}
                 </div>}
+
+
                 {question.answers.length < 4 && <div className="answer">
                     <input type="text" name="answer" placeholder="এখানে উত্তরটি লিখুন" value={option.answer} onChange={(e)=>handleInput(e,option,setOption)}/>
                     <div className="">
@@ -49,10 +54,20 @@ export default function AddQuestion(){
                             <option value='false'>ভুল</option>
                             <option value='true'>সঠিক</option>
                         </select>
-                        <button onClick={()=>addAnswer(option,setOption,question,setQuestion)}>+</button>
                     </div>
+                    
                 </div>}
-                <button onClick={()=>addQuestion(question,setQuestion)}>যোগ করুন</button>
+
+
+                {question.answers.length < 4 &&  <p>{question.answers.length == 0 ? "(৪ টি উত্তর যুক্ত করতে হবে !)" : `(${4-question.answers.length} টি বাকি আছে)`}</p>}
+
+
+                {question.answers.length < 4 && <button onClick={()=>addAnswer(option,setOption,question,setQuestion,toast)}>
+                    উত্তর যুক্ত করুন
+                </button>}
+
+
+                {question.answers.length >3 &&<button onClick={()=>addQuestion(question,setQuestion,toast)}>যোগ করুন</button>}
             </div>
         </div>
     )

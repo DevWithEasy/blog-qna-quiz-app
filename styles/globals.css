@@ -5,6 +5,12 @@
 @import "./header.css";
 @import "./add_question.css";
 @import "./add_category.css";
+@import "./quiz_home.css";
+@import "./home.css";
+@import "./qna.css";
+@import "./account.css";
+@import "./admin.css";
+
 
 @import "tailwindcss/components";
 

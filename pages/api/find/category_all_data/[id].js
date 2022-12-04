@@ -7,7 +7,7 @@ export default async function handler(req,res){
         const data = await getDoc(categoryRef);
         if(data.exists()){
             const category = data.data()
-            const q = query(collection(db,'questions'),where("name", "==", category.name));
+            const q = query(collection(db,'questions'),where("category", "==", category.name));
             const Questiondata = await getDocs(q)
             let questions =[]
             Questiondata.forEach(doc=> questions.push(doc.data()))

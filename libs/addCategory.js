@@ -13,7 +13,7 @@ export default async function addCategory(category,toast,setCategory){
                 })
             }
         }else{
-            alert('অনুগ্রহপূর্বক ক্যাটাগরীর নাম লিখন')
+            toast.error('অনুগ্রহপূর্বক ক্যাটাগরীর নাম লিখন')
         }
     } catch (error) {
         console.log(error)

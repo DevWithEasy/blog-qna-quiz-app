@@ -1,5 +1,5 @@
 .add_category{
-    @apply flex justify-center items-center min-h-screen;
+    @apply flex justify-center items-center;
     &>div{
         @apply w-full mx-4 md:w-6/12 flex flex-col space-y-3 p-4 bg-white shadow-md rounded-md;
         &>h1{
