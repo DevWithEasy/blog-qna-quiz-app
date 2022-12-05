@@ -1,12 +1,18 @@
 .header{
     @apply absolute w-full top-0 bg-blue-500 text-white p-2 flex justify-between items-center shadow-md;
-    &>h1{
+    &>a{
         @apply text-2xl font-bold
     }
     &>.header_link{
-        @apply hidden sm:block space-x-2;
+        @apply hidden sm:flex space-x-2;
         &>a{
             @apply p-2 bg-white text-gray-600 rounded-md
+        }
+        &>.login{
+            @apply px-2 py-1 bg-green-500 rounded-md
+        }
+        &>.logout{
+            @apply px-2 py-1 bg-red-500 rounded-md
         }
     }
     &>.header_profile_icon{
@@ -15,9 +21,15 @@
             @apply h-10 w-10 rounded-full border
         }
         &>div{
-            @apply absolute z-10 right-4 w-40 p-2 space-y-2 bg-white text-black  rounded shadow ;
-            &>button{
-                @apply w-full py-2 rounded  transition-all duration-300 hover:text-white bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 hover:bg-gradient-to-r hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500;
+            @apply absolute z-10 flex flex-col right-4 w-40 p-2 space-y-2 bg-white text-black  rounded shadow ;
+            &>a{
+                @apply p-2 hover:bg-gray-100 rounded-md transition-all duration-300;
+            }
+            &>.login{
+                @apply px-2 py-1.5 bg-green-500 rounded-md
+            }
+            &>.logout{
+                @apply px-2 py-1.5 bg-red-500 text-white rounded-md
             }
         }
     }

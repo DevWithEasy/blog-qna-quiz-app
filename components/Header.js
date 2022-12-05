@@ -1,24 +1,43 @@
 import { useState } from "react";
 import Link from "next/link";
+import {BiMenu,BiMenuAltLeft} from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
+import { signout } from "../store/slice/authSlice";
+import logout from "../libs/logout";
+import { useRouter } from "next/router";
 
 export default function Header(){
+    const router = useRouter ()
+    const user = useSelector(state=>state.auth.user)
+    const dispatch = useDispatch ()
     const [menu,setMenu] = useState(false)
     return(
         
         <div className="header">
-            <h1>কুইজ  বক্স</h1>
+            <Link href="/home"><a>ইসলাম.বিডি</a></Link>
             <div className="header_link">
                 <Link href="/home"><a>মুলপাতা</a></Link>
                 <Link href="/qna"><a>প্রশ্নোত্তর</a></Link>
                 <Link href="/quiz"><a>কুইজ</a></Link>
-                <Link href="/admin"><a>এডমিন</a></Link>
-                <Link href="/account"><a>একাউন্ট</a></Link>
+                {user?.type ==='admin' && <Link href="/admin"><a>এডমিন</a></Link>}
+                {user.id &&  <Link href="/account"><a>একাউন্ট</a></Link>}
+                {!user.id && <button className="login" onClick={()=>router.push('/login')}>লগ ইন</button>}
+                {user.id && <button className="logout" onClick={()=>logout(router,dispatch,signout)}>লগ আউট</button>}
             </div>
             <div className="header_profile_icon">
-                <button onClick={()=>setMenu(!menu)}>+</button>
+
+                {/* menu button */}
+                {!menu ? <BiMenu size={20} onClick={()=>setMenu(!menu)}/> : <BiMenuAltLeft size={20} onClick={()=>setMenu(!menu)}/>}
+                
+                {/* menu option */}
                 {menu && <div className="">
-                    <button>Profile</button>
-                    <button>logout</button>
+                    <Link href="/home"><a>মুলপাতা</a></Link>
+                    <Link href="/qna"><a>প্রশ্নোত্তর</a></Link>
+                    <Link href="/quiz"><a>কুইজ</a></Link>
+                    {user?.type ==='admin' && <Link href="/admin"><a>এডমিন</a></Link>}
+                    {user.id && <Link href="/account"><a>একাউন্ট</a></Link>}
+                    {!user.id && <button className="login" onClick={()=>router.push('/login')}>লগ ইন</button>}
+                    {user.id && <button className="logout" onClick={()=>logout(router,dispatch,signout)}>লগ আউট</button>}
                 </div>}
             </div>
         </div>

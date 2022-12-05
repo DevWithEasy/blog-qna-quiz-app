@@ -1,10 +1,10 @@
 import axios from "axios";
-import {v4 as uuidv4} from "uuid";
+import { v4 as uuidv4 } from "uuid";
 
 export default async function addCategory(category,toast,setCategory){
     try {
         if(category.name){
-            const res = await axios.post('/api/add/category',category)
+            const res = await axios.post('/api/category/add',category)
             if(res.data.status === 200){
                 toast.success("সফল ভাবে যুক্ত হয়েছে।")
                 setCategory({

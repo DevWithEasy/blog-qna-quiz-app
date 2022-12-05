@@ -17,7 +17,9 @@ export default function Quiz() {
   const [currentQuestion,setCurrentQuestion] = useState(0)
   const [score,setScore] = useState(0)
   useEffect(()=>{
-    getCategoryAllData(router.query.id,dispatch,category,toast)
+    if(router.query.id){
+      getCategoryAllData(router.query.id,dispatch,category,toast)
+    }
   },[router.query.id,dispatch])
   return (
       <div className='quiz'>

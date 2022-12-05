@@ -1,9 +1,9 @@
 import React from 'react';
-import login from '../libs/login';
 import {AiFillGoogleCircle} from 'react-icons/ai'
 import { useDispatch } from 'react-redux';
-import { signin } from '../store/slice/authSlice';
 import { useRouter } from 'next/router';
+import login from '../../libs/login';
+import { signin } from '../../store/slice/authSlice';
 
 export default function Login() {
     const dispatch= useDispatch()

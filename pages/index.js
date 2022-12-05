@@ -5,9 +5,9 @@ export default function Index() {
     const user = useSelector(state=>state.auth.user)
     const router = useRouter()
     if(!user.id){
-        router.push('/login')
+        router.push('/user/login')
     }
     if(user.id){
-        router.push('/quiz')
+        router.push('/home')
     }
 }

@@ -1,7 +1,7 @@
 .quiz{
     @apply space-y-2;
     &>div{
-      @apply mx-4 p-3 bg-white  rounded-md shadow-md
+      @apply mx-4  p-3 bg-white  rounded-md shadow-md
     }
     &>.start{
       @apply flex justify-center items-center;

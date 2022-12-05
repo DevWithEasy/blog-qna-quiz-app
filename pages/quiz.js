@@ -11,7 +11,7 @@ export default function Quize(){
     },[])
     console.log(categories);
     return(
-        <div className="quize_home">
+        <div className="quiz_home">
             {
                categories && categories.map((category) => <Link key={category.id} href={`quiz/${category.id}`}>
                 <a >
