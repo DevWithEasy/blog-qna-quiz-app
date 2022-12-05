@@ -1,13 +1,17 @@
-import { doc, setDoc } from "firebase/firestore";
+import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "../../../database/initDatabase";
+
 
 export default async function handler(req,res){
     try {
-        await setDoc (doc(db,'qna_questions',req.body.id),req.body)
+        const q = query(collection(db,'qna_questions'));
+        const data = await getDocs(q)
+        let questions =[]
+        data.forEach(doc=> questions.push(doc.data()))
         res.status(200).json({
             success : true,
             status : 200,
-            message : 'Added successfully'
+            data : questions
         })
     } catch (error) {
         res.status(500).json({

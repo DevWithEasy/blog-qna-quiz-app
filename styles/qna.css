@@ -1,0 +1,30 @@
+.qna{
+    @apply mx-4 space-y-2;
+    &>h1{
+        @apply text-xl ;
+    }
+    &>.qna_question{
+        @apply px-4 py-2 flex items-center bg-white rounded;
+        &>.answer_count{
+            @apply h-16 w-16 p-2 bg-green-500 text-white text-center rounded;
+            &>.count{
+                @apply text-xl;
+            }
+        }
+        &>.question_details{
+            @apply pl-4 space-y-1;
+            &>a{
+                @apply text-blue-500;
+            }
+            &>.details{
+                @apply flex text-sm;
+                &>img{
+                    @apply w-6 h-6 rounded-full;
+                }
+            }
+            &>button{
+                @apply bg-yellow-500 text-white rounded text-sm px-2 py-0.5;
+            }
+        }
+    }
+}

@@ -5,17 +5,21 @@ import {v4 as uuidv4} from "uuid";
 import handleInput from "../../libs/handleInput";
 import 'react-quill/dist/quill.snow.css';
 import dynamic from "next/dynamic";
-import { postQna } from "../../libs/qnaHandler";
+import { postQnaQuestion } from "../../libs/qnaHandler";
+import { useSelector } from "react-redux";
+import { serverTimestamp } from "firebase/firestore";
 const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 
 export default function CreateNew(){
+    const user = useSelector(state=>state.auth.user)
     const [value,setValue] = useState()
     const [categories,setCategories] = useState([])
     const [question,setQuestion] = useState({
         id : uuidv4(),
+        user : user.id,
+        createdAt: Date.now(),
         category : '',
-        question: '',
-        details : value
+        question: ''
     })
 
     const qnaData = ({...question,details : value});
@@ -57,7 +61,7 @@ export default function CreateNew(){
                 <ReactQuill modules={modules} onChange={setValue} placeholder="আপনার প্রশ্নের বিস্তারিত লিখুন (যদি থাকে)" style={{height:"400px"}}/>
             </div>
 
-            <button onClick={()=>postQna(qnaData,toast)}>সাবমিট করুন</button>
+            <button onClick={()=>postQnaQuestion(qnaData,toast)}>সাবমিট করুন</button>
         </div>
     )
 }
