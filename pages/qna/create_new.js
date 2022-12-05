@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react"
-import getAllCategory from "../../libs/getAllCategory"
+import { useEffect, useState } from "react";
+import toast from 'react-hot-toast';
+import getAllCategory from "../../libs/getAllCategory";
 import {v4 as uuidv4} from "uuid";
 import handleInput from "../../libs/handleInput";
 import 'react-quill/dist/quill.snow.css';
 import dynamic from "next/dynamic";
+import { postQna } from "../../libs/qnaHandler";
 const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 
 export default function CreateNew(){
@@ -55,7 +57,7 @@ export default function CreateNew(){
                 <ReactQuill modules={modules} onChange={setValue} placeholder="আপনার প্রশ্নের বিস্তারিত লিখুন (যদি থাকে)" style={{height:"400px"}}/>
             </div>
 
-            <button>সাবমিট করুন</button>
+            <button onClick={()=>postQna(qnaData,toast)}>সাবমিট করুন</button>
         </div>
     )
 }

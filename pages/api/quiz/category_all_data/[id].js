@@ -1,5 +1,6 @@
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
-import { db } from "../../../../utils/firebase";
+import { db } from "../../../../database/initDatabase";
+
 
 export default async function handler(req,res){
     try {

@@ -1,6 +1,6 @@
 import { signInWithPopup } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { auth, db, provider } from "../utils/firebase";
+import { auth, db, provider } from "../database/initDatabase";
 
 export default async function login(router,dispatch,action){
     try {

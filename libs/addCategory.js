@@ -1,7 +1,7 @@
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
-export default async function addCategory(category,toast,setCategory){
+export async function addCategory(category,toast,setCategory){
     try {
         if(category.name){
             const res = await axios.post('/api/category/add',category)

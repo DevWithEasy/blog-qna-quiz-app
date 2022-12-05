@@ -1,4 +1,4 @@
-export default function addAnswer(option,setOption,value,setValue,toast){
+export function addAnswer(option,setOption,value,setValue,toast){
     if(!option.answer){
         toast.error('আপনি উত্তরটি ফাঁকা রেখেছেন। উত্তর লিখুন')
     }else{
