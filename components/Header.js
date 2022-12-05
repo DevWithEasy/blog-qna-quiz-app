@@ -27,7 +27,7 @@ export default function Header(){
             <div className="header_profile_icon">
 
                 {/* menu button */}
-                {!menu ? <BiMenu size={20} onClick={()=>setMenu(!menu)}/> : <BiMenuAltLeft size={20} onClick={()=>setMenu(!menu)}/>}
+                {!menu ? <BiMenu size={25} onClick={()=>setMenu(!menu)}/> : <BiMenuAltLeft size={25} onClick={()=>setMenu(!menu)}/>}
                 
                 {/* menu option */}
                 {menu && <div className="">
