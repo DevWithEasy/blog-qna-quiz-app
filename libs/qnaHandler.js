@@ -75,12 +75,27 @@ export async function postQnaComment(data,toast){
         if(!data.user || !data.ansId || !data.comment){
             toast.error("সবগুলো তথ্য সঠিকভাবে দিন")
         }else{
-            const res = await axios.post('/api/qna/answer',data)
+            const res = await axios.post('/api/qna/comment',data)
             if(res.data){
                 toast.success("সফল ভাবে যুক্ত হয়েছে")
             }
         }
     } catch (error) {
         toast.error(error.response.data.message)
+    }
+}
+
+export async function getAllComments(id,setComments,toast){
+    try{
+        const res = await axios.get(`/api/qna/comment/all/${id}`)
+        if(res.data){
+            setComments(res.data.data)
+            // dispatch(action(res.data.data))
+            // toast.success("ডাটা লোড হয়েছে")
+            // console.log(res.data);
+        }
+        console.log(res.data);
+    }catch(error){
+        toast.error(error.response.data.message);
     }
 }

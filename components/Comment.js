@@ -26,6 +26,7 @@ export default function Comment({user,ansId}){
             ["clean"]
         ]
     }
+    console.log(commentData);
     return(
         <div className="editor">
             <ReactQuill modules={modules}

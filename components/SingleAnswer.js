@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { format } from "timeago.js";
 import findUser from "../libs/findUser";
 import Comment from "./Comment";
+import Comments from "./Comments";
 
 export default function SingleAnswer({answer}){
     const auth = useSelector(state=>state.auth.isAuth)
@@ -15,7 +16,6 @@ export default function SingleAnswer({answer}){
     useEffect(()=>{
         findUser(answer.user,setUser,toast)
     },[answer])
-    console.log(user);
     return(
         <div className="qna_answer_details">
             <div className="qna_answer">
@@ -45,6 +45,8 @@ export default function SingleAnswer({answer}){
                             </p>
                         }
                     </div>}
+
+                    <Comments ansId={answer.id}/>
                 </div>
             </div>
 

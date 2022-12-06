@@ -47,8 +47,12 @@
                 }
                 &>.answer_details{
                     @apply w-full space-y-3 pl-4;
+                    &>p{
+                        @apply text-sm;
+                    }
                     &>.details{
                         @apply space-y-2;
+                        
                     }
                     &>button{
                         @apply px-2 py-1 flex items-center space-x-2 bg-slate-600 text-white shadow rounded;
@@ -63,6 +67,23 @@
                             @apply py-2;
                             &>a{
                                 @apply underline underline-offset-4 text-blue-500;
+                            }
+                        }
+                    }
+                    &>.qna_comments{
+                        @apply p-4 space-y-3;
+                        &>.qna_comments_details{
+                            &>.qna_comment{
+                                @apply flex p-2 shadow rounded;
+                                &>img{
+                                    @apply h-12 w-12 rounded-full;
+                                }
+                                &>.comment_details{
+                                    @apply w-full pl-4 space-y-2;
+                                    &>p{
+                                        @apply text-sm
+                                    }
+                                }
                             }
                         }
                     }
