@@ -7,9 +7,9 @@ import { getQnaQuestion } from "../../../libs/qnaHandler"
 import { currentQuestion } from "../../../store/slice/qnaSlice"
 import { format } from 'timeago.js';
 import {FaCommentAlt} from 'react-icons/fa'
-import Answer from "../../../components/Answer"
+import Answer from "../../../components/answer/Answer"
 import Link from "next/link"
-import Answers from "../../../components/Answers"
+import Answers from "../../../components/answer/Answers"
 
 export default function QnaDetails(){
     const router = useRouter()
@@ -20,17 +20,22 @@ export default function QnaDetails(){
     const [user,setUser] = useState({})
     useEffect(()=>{
         if(router.query.id){getQnaQuestion(router.query.id,dispatch,currentQuestion,toast)}
-        
-        findUser(currentQna.user,setUser,toast)
     },[router.query.id,dispatch])
-    
+    useEffect(()=>{
+        findUser(currentQna.user,setUser,toast)
+    },[currentQna])
     return(
         <div className="qna_details">
             <div className="qna_question">
                 <img src={user?.image} alt="" />
                 <div className="question_details">
                     <div className="">
-                        <p>প্রশ্নটি করেছেন : {user.name}</p>
+                        <p>প্রশ্নটি করেছেন : 
+                            <Link href={`/user/profile/${user.id}`}>
+                                <a href=""> {user.name}</a>
+                            </Link>
+                            
+                        </p>
                         <p>বিভাগ : {currentQna?.category}</p>
                         <p>প্রশ্নটি করা হয়েছে {format(currentQna.createdAt)}</p>
                     </div>
@@ -48,7 +53,7 @@ export default function QnaDetails(){
 
                     {answer && <div className="answer">
                         {auth ? 
-                            <Answer user={user.id} qId={currentQna.id}/> : 
+                            <Answer user={user.id} qId={currentQna.id} setAnswer={setAnswer}/> : 
                             <p>
                                 উত্তর দেওয়ার জন্য অনুগহপুর্বক
                                 <Link href="/user/login"><a > লগ-ইন </a></Link>করে নিন। 

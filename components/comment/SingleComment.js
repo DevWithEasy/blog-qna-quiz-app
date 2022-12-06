@@ -2,9 +2,8 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
 import { format } from "timeago.js";
-import findUser from "../libs/findUser";
+import findUser from "../../libs/findUser";
 
 export default function SingleComment({comment}){
     const [user,setUser] = useState({})
@@ -18,7 +17,7 @@ export default function SingleComment({comment}){
                 <img src={user?.image} alt="" />
                 <div className="comment_details">
                     <p>
-                        {format(comment.createdAt)} উত্তর প্রদান করেছেন <Link href={`/user/profile/`}>
+                        {format(comment.createdAt)}  মন্তব্য করেছেন <Link href={`/user/profile/${user.id}`}>
                             <a >{user.name}</a>
                         </Link>
                     </p>

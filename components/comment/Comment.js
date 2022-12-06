@@ -2,17 +2,20 @@ import { useState } from "react";
 import {v4 as uuidv4} from "uuid";
 import 'react-quill/dist/quill.bubble.css';
 import dynamic from "next/dynamic";
-import { postQnaAnswer } from "../libs/qnaHandler";
 import toast from "react-hot-toast";
+import { postQnaComment } from "../../libs/qnaHandler";
+import { useDispatch } from "react-redux";
+import { refresh } from "../../store/slice/qnaSlice";
 const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 
-export default function Answer({user,qId}){
+export default function Comment({user,ansId,setComment}){
+    const dispatch = useDispatch()
     const [value,setValue] = useState('')
-    const answerData = {
+    const commentData = {
         id:uuidv4(),
-        qId:qId,
+        ansId:ansId,
         user,
-        answer:value,
+        comment:value,
         createdAt:Date.now()
     }
     const modules ={
@@ -26,14 +29,18 @@ export default function Answer({user,qId}){
             ["clean"]
         ]
     }
+    console.log(commentData);
     return(
         <div className="editor">
             <ReactQuill modules={modules}
                 theme="bubble"
                 value={value}
-                onChange={setValue} placeholder="আপনার উত্তরটি লিখুন" style={{height:"150px"}}
+                onChange={setValue} placeholder="আপনার মন্তব্য লিখুন" style={{height:"150px"}}
             />
-            <button onClick={()=>postQnaAnswer(answerData,toast)}>সাবমিট</button>
+            <div className="submit">
+                <button className="ok" onClick={()=>postQnaComment(commentData,dispatch,refresh,setComment,setValue,toast)}>সাবমিট</button>
+                <button className="cancel" onClick={()=>setComment(false)}>বাতিল</button>
+            </div>
         </div>
     )
 }

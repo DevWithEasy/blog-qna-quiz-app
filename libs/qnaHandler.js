@@ -41,13 +41,16 @@ export async function getQnaQuestion(id,dispatch,action,toast){
     }
 }
 
-export async function postQnaAnswer(data,toast){
+export async function postQnaAnswer(data,dispatch,action,setAnswer,setValue,toast){
     try {
         if(!data.user || !data.qId || !data.answer){
             toast.error("সবগুলো তথ্য সঠিকভাবে দিন")
         }else{
             const res = await axios.post('/api/qna/answer',data)
             if(res.data){
+                setAnswer(false)
+                setValue("")
+                dispatch(action(Math.random()))
                 toast.success("সফল ভাবে যুক্ত হয়েছে")
             }
         }
@@ -56,11 +59,11 @@ export async function postQnaAnswer(data,toast){
     }
 }
 
-export async function getAllQnaAnswers(id,dispatch,action,toast){
+export async function getAllQnaAnswers(id,setAnswers,toast){
     try{
         const res = await axios.get(`/api/qna/answer/all/${id}`)
         if(res.data){
-            dispatch(action(res.data.data))
+            setAnswers(res.data.data)
             // toast.success("ডাটা লোড হয়েছে")
             console.log(res.data);
         }
@@ -70,13 +73,16 @@ export async function getAllQnaAnswers(id,dispatch,action,toast){
     }
 }
 
-export async function postQnaComment(data,toast){
+export async function postQnaComment(data,dispatch,action,setComment,setValue,toast){
     try {
         if(!data.user || !data.ansId || !data.comment){
             toast.error("সবগুলো তথ্য সঠিকভাবে দিন")
         }else{
             const res = await axios.post('/api/qna/comment',data)
             if(res.data){
+                setComment(false)
+                setValue("")
+                dispatch(action(Math.random()))
                 toast.success("সফল ভাবে যুক্ত হয়েছে")
             }
         }

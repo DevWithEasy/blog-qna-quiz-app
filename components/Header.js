@@ -20,7 +20,7 @@ export default function Header(){
                 <Link href="/qna"><a>প্রশ্নোত্তর</a></Link>
                 <Link href="/quiz"><a>কুইজ</a></Link>
                 {user?.type ==='admin' && <Link href="/admin"><a>এডমিন</a></Link>}
-                {user.id &&  <Link href="/user/profile"><a>একাউন্ট</a></Link>}
+                {user.id &&  <Link href={`/user/profile/${user.id}`}><a>একাউন্ট</a></Link>}
                 {!user.id && <button className="login" onClick={()=>router.push('/user/login')}>লগ ইন</button>}
                 {user.id && <button className="logout" onClick={()=>logout(router,dispatch,signout)}>লগ আউট</button>}
             </div>
@@ -35,7 +35,7 @@ export default function Header(){
                     <Link href="/qna"><a>প্রশ্নোত্তর</a></Link>
                     <Link href="/quiz"><a>কুইজ</a></Link>
                     {user?.type ==='admin' && <Link href="/admin"><a>এডমিন</a></Link>}
-                    {user.id && <Link href="/user/profile"><a>একাউন্ট</a></Link>}
+                    {user.id && <Link href={`/user/profile/${user.id}`}><a>একাউন্ট</a></Link>}
                     {!user.id && <button className="login" onClick={()=>router.push('/user/login')}>লগ ইন</button>}
                     {user.id && <button className="logout" onClick={()=>logout(router,dispatch,signout)}>লগ আউট</button>}
                 </div>}

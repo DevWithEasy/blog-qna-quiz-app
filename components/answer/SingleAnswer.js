@@ -5,9 +5,10 @@ import toast from "react-hot-toast";
 import { FaComments } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { format } from "timeago.js";
-import findUser from "../libs/findUser";
-import Comment from "./Comment";
-import Comments from "./Comments";
+import findUser from "../../libs/findUser";
+import Comment from "../comment/Comment";
+import Comments from "../comment/Comments";
+
 
 export default function SingleAnswer({answer}){
     const auth = useSelector(state=>state.auth.isAuth)
@@ -22,7 +23,7 @@ export default function SingleAnswer({answer}){
                 <img src={user?.image} alt="" />
                 <div className="answer_details">
                     <p>
-                        {format(answer.createdAt)} উত্তর প্রদান করেছেন <Link href={`/user/profile/`}>
+                        {format(answer.createdAt)} উত্তর প্রদান করেছেন <Link href={`/user/profile/${user.id}`}>
                             <a >{user.name}</a>
                         </Link>
                     </p>
@@ -31,6 +32,7 @@ export default function SingleAnswer({answer}){
                         <p className="details" dangerouslySetInnerHTML={{__html: answer?.answer}}></p>
                     </div>
                     <hr />
+
                     <button onClick={()=>setComment(!comment)}>
                         <FaComments/>
                         <span>মন্তব্য লিখুন</span>
@@ -38,18 +40,16 @@ export default function SingleAnswer({answer}){
                     
                     {comment && <div className="comment">
                         {auth ? 
-                            <Comment user={user.id} ansId={answer.id}/> : 
+                            <Comment user={user.id} ansId={answer.id} setComment={setComment}/> : 
                             <p>
                                 উত্তর দেওয়ার জন্য অনুগহপুর্বক
                                 <Link href="/user/login"><a > লগ-ইন </a></Link>করে নিন। 
                             </p>
                         }
                     </div>}
-
-                    <Comments ansId={answer.id}/>
                 </div>
             </div>
-
+            <Comments ansId={answer.id}/>
             
         </div>
     )
