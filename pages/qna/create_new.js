@@ -7,10 +7,12 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from "next/dynamic";
 import { postQnaQuestion } from "../../libs/qnaHandler";
 import { useSelector } from "react-redux";
-import { serverTimestamp } from "firebase/firestore";
+import { useRouter } from "next/router";
+import modules from "../../utils/editorModule";
 const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 
 export default function CreateNew(){
+    const router = useRouter()
     const user = useSelector(state=>state.auth.user)
     const [value,setValue] = useState()
     const [categories,setCategories] = useState([])
@@ -28,21 +30,6 @@ export default function CreateNew(){
         getAllCategory(setCategories)
     },[])
 
-    
-    const modules ={
-        toolbar: [
-        [{ font: [] }],
-        [{ header: [1, 2, 3, 4, 5, 6, false] }],
-        ["bold", "italic", "underline", "strike"],
-        [{ color: [] }, { background: [] }],
-        [{ script:  "sub" }, { script:  "super" }],
-        ["blockquote", "code-block"],
-        [{ list:  "ordered" }, { list:  "bullet" }],
-        [{ indent:  "-1" }, { indent:  "+1" }, { align: [] }],
-        ["link", "image", "video"],
-        ["clean"],
-    ],
-    }
 
     return(
         <div className="create_new">
@@ -58,10 +45,12 @@ export default function CreateNew(){
             <input type="text" name="question" value={question.question} placeholder="এখানে প্রশ্নটি লিখুন" onChange={(e)=>handleInput(e,question,setQuestion)}/>
 
             <div className="editor">
-                <ReactQuill modules={modules} onChange={setValue} placeholder="আপনার প্রশ্নের বিস্তারিত লিখুন (যদি থাকে)" style={{height:"400px"}}/>
+                <ReactQuill modules={modules}
+                theme="snow"
+                onChange={setValue} placeholder="আপনার প্রশ্নের বিস্তারিত লিখুন (যদি থাকে)" style={{height:"400px"}}/>
             </div>
 
-            <button onClick={()=>postQnaQuestion(qnaData,toast)}>সাবমিট করুন</button>
+            <button onClick={()=>postQnaQuestion(qnaData,router,toast)}>সাবমিট করুন</button>
         </div>
     )
 }

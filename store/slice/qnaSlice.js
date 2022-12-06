@@ -4,7 +4,8 @@ const qnaSlice = createSlice({
     name: 'quiz',
     initialState: {
         questions: [],
-        currentQna: {}
+        currentQna: {},
+        answers : []
     },
     reducers: {
         allQuestion : (state,action)=>{
@@ -12,8 +13,11 @@ const qnaSlice = createSlice({
         },
         currentQuestion : (state, action)=>{
             state.currentQna = action.payload
+        },
+        allAnswers: (state, action)=>{
+            state.answers = action.payload
         }
     }
 })
-export const {allQuestion,currentQuestion} = qnaSlice.actions
+export const {allQuestion,currentQuestion,allAnswers} = qnaSlice.actions
 export default qnaSlice.reducer

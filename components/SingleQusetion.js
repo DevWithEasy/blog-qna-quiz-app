@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import findUser from "../libs/findUser";
 import { format } from 'timeago.js';
 
-export default function Question({question}){
+export default function SingleQuestion({question}){
     const [user,setUser] = useState({})
     useEffect(()=>{
         findUser(question.user,setUser,toast)

@@ -1,10 +1,10 @@
-import { collection, getDocs, query } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../../database/initDatabase";
 
 
 export default async function handler(req,res){
     try {
-        const q = query(collection(db,'qna_questions'));
+        const q = query(collection(db,'qna_questions'),orderBy("createdAt", "desc"));
         const data = await getDocs(q)
         let questions =[]
         data.forEach(doc=> questions.push(doc.data()))

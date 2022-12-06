@@ -1,7 +1,13 @@
 .qna{
     @apply mx-4 space-y-2;
-    &>h1{
-        @apply text-xl ;
+    &>.title{
+        @apply flex justify-between items-center;
+        &>h1{
+            @apply text-2xl;
+        }
+        &>a{
+            @apply flex items-center space-x-2 px-4 py-2 bg-green-500 text-white rounded-md;
+        }
     }
     &>.qna_question{
         @apply px-4 py-2 flex items-center bg-white rounded;
