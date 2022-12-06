@@ -70,6 +70,7 @@ export async function getAllQnaAnswers(id,setAnswers,toast){
         console.log(res.data);
     }catch(error){
         toast.error(error.response.data.message);
+        console.log(error);
     }
 }
 
@@ -103,5 +104,6 @@ export async function getAllComments(id,setComments,toast){
         console.log(res.data);
     }catch(error){
         toast.error(error.response.data.message);
+        console.log(error);
     }
 }

@@ -18,4 +18,13 @@
     &>button{
         @apply w-full p-2 rounded-md bg-blue-500 text-white;
     }
+    &>div{
+        @apply space-y-2;
+        &>input{
+            @apply w-full p-1.5 bg-white rounded-md;
+        }
+        &>button{
+            @apply p-1.5 rounded-md bg-blue-500 text-white;
+        }
+    }
 }

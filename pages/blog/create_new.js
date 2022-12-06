@@ -1,42 +1,35 @@
-import { useEffect, useState } from "react"
-import getAllCategory from "../../libs/getAllCategory"
-import {v4 as uuidv4} from "uuid";
-import handleInput from "../../libs/handleInput";
-import 'react-quill/dist/quill.snow.css';
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import 'react-quill/dist/quill.snow.css';
+import { v4 as uuidv4 } from "uuid";
+import { postBlog, uploadFile } from "../../libs/blogHandler";
+import getAllCategory from "../../libs/getAllCategory";
+import handleInput from "../../libs/handleInput";
+import modules from "../../utils/editorModule";
 const ReactQuill = dynamic(import('react-quill'), { ssr: false })
+
 
 export default function CreateNew(){
     const [value,setValue] = useState()
     const [categories,setCategories] = useState([])
+    const [file,setFile] = useState({})
+    const [url,setUrl] = useState('')
+    const [progress,setProgress] = useState(0)
     const [question,setQuestion] = useState({
         id : uuidv4(),
         category : '',
         question: '',
-        details : value
+        details : value,
+        likes : [],
+        dislikes :[]
     })
 
-    const qnaData = ({...question,details : value});
+    const postData = ({...question, image : url, details : value});
 
     useEffect(()=>{
         getAllCategory(setCategories)
     },[])
-
-    
-    const modules ={
-        toolbar: [
-        [{ font: [] }],
-        [{ header: [1, 2, 3, 4, 5, 6, false] }],
-        ["bold", "italic", "underline", "strike"],
-        [{ color: [] }, { background: [] }],
-        [{ script:  "sub" }, { script:  "super" }],
-        ["blockquote", "code-block"],
-        [{ list:  "ordered" }, { list:  "bullet" }],
-        [{ indent:  "-1" }, { indent:  "+1" }, { align: [] }],
-        ["link", "image", "video"],
-        ["clean"],
-    ],
-    }
 
     return(
         <div className="create_new">
@@ -51,11 +44,18 @@ export default function CreateNew(){
 
             <input type="text" name="question" value={question.question} placeholder="এখানে টাইটেল লিখুন" onChange={(e)=>handleInput(e,question,setQuestion)}/>
 
+            <div className="">
+                <input type="file" name="" onChange={(e)=>setFile(e.target.files[0])}/>
+                <button onClick={()=>uploadFile(file,setProgress,setUrl,toast)}>আপলোড করুন</button>
+                {/* {progress < 0 ? `` : progress > 0 ? `uploading`:`complete`} */}
+                <p>{progress}</p>
+            </div>
+
             <div className="editor">
                 <ReactQuill modules={modules} onChange={setValue} placeholder="পোস্টের বিস্তারিত লিখুন" style={{height:"400px"}}/>
             </div>
 
-            <button>সাবমিট করুন</button>
+            <button onSubmit={()=>postBlog(postData)}>সাবমিট করুন</button>
         </div>
     )
 }

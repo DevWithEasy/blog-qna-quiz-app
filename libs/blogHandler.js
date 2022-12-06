@@ -1,0 +1,55 @@
+import axios from "axios";
+import { ref, uploadBytesResumable,getDownloadURL  } from "firebase/storage";
+import { storage } from "../database/initDatabase";
+
+export async function uploadFile(file,setProgress,setUrl,toast){
+    if(!file) return toast.error('ছবি আপলোড করুন')
+    if(file.size > 1000000) return toast.error('০১ মেগাবাইটের নিচে ছবি আপলোড করুন')
+    // if(file.type === "image/png" || file.type === "image/jpg" || file.type === "image/jepg") {
+    //     const storageRef = ref(storage,`islamBD/blog_post/${file.name}`)
+    //     const uploadTask = uploadBytesResumable(storageRef, file)
+    //     uploadTask.on("state_changed",(snapshot)=>{
+    //         const progress = Math.round(snapshot.bytesTransferred/snapshot.totalBytes) * 100
+    //         setProgress(progress)
+    //     },(error)=>{
+    //         console.log(error);
+    //     },()=>{
+    //         getDownloadURL(uploadTask.snapshot.ref)
+    //         .then(url=>{
+    //             setUrl(url)
+    //         })
+    //         .catch(error=>{
+    //             console.log(error)
+    //         })
+    //     })
+
+    // }else{
+    //     return toast.error('শুধুমাত্র ছবি আপলোড করতে পারবেন।')
+    // }
+    const storageRef = ref(storage,`islamBD/blog_post/${file.name}`)
+        const uploadTask = uploadBytesResumable(storageRef, file)
+        uploadTask.on("state_changed",(snapshot)=>{
+            const progress = Math.round(snapshot.bytesTransferred/snapshot.totalBytes) * 100
+            setProgress(progress)
+        },(error)=>{
+            console.log(error);
+        },()=>{
+            getDownloadURL(uploadTask.snapshot.ref)
+            .then(url=>{
+                setUrl(url)
+            })
+            .catch(error=>{
+                console.log(error)
+            })
+        })
+}
+
+export async function postBlog(data){
+    console.log("object");
+    try {
+        const res = await axios.post('/api/blog',data)
+        console.log(res.data)
+    } catch (error) {
+        console.log(error);
+    }
+}

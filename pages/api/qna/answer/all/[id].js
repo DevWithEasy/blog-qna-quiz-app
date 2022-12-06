@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "../../../../../database/initDatabase";
 
 export default async function handler(req,res){
@@ -6,7 +6,7 @@ export default async function handler(req,res){
         const categoryRef= doc(db,'qna_questions',req.query.id);
         const data = await getDoc(categoryRef);
         if(data.exists()){
-            const q = query(collection(db,'qna_answers'),where("qId", "==", req.query.id));
+            const q = query(collection(db,'qna_answers'),where("qId", "==", req.query.id),orderBy("createdAt", "desc"));
             const answerData = await getDocs(q)
             let answers =[]
             answerData.forEach(doc=> answers.push(doc.data()))

@@ -14,9 +14,9 @@ export default function Header(){
     return(
         
         <div className="header">
-            <Link href="/home"><a>ইসলাম.বিডি</a></Link>
+            <Link href="/"><a>ইসলাম.বিডি</a></Link>
             <div className="header_link">
-                <Link href="/home"><a>মুলপাতা</a></Link>
+                <Link href="/"><a>মুলপাতা</a></Link>
                 <Link href="/qna"><a>প্রশ্নোত্তর</a></Link>
                 <Link href="/quiz"><a>কুইজ</a></Link>
                 {user?.type ==='admin' && <Link href="/admin"><a>এডমিন</a></Link>}
@@ -31,7 +31,7 @@ export default function Header(){
                 
                 {/* menu option */}
                 {menu && <div className="">
-                    <Link href="/home"><a>মুলপাতা</a></Link>
+                    <Link href="/"><a>মুলপাতা</a></Link>
                     <Link href="/qna"><a>প্রশ্নোত্তর</a></Link>
                     <Link href="/quiz"><a>কুইজ</a></Link>
                     {user?.type ==='admin' && <Link href="/admin"><a>এডমিন</a></Link>}
