@@ -1,9 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
+import { getBlogPost } from "../../../database/controllers/blogControllers";
+
 export default function handler(req, res) {
   switch (req.method){
     case 'GET':
-      return res.status(200).json({})
+      getBlogPost(req,res)
       break;
     case 'POST':
       return res.status(200).json({})

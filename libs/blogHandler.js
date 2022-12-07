@@ -66,3 +66,14 @@ export async function getAllBlogPost(setBlogs){
         console.log(error);
     }
 }
+
+export async function getBlogPost(id,setBlog){
+    try {
+        const res = await axios.get(`/api/blog/${id}`)
+        if(res.data){
+            setBlog(res.data.data)
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}

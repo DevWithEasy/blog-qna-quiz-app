@@ -1,0 +1,32 @@
+.blog_details{
+    &>.blog_details_title{
+        @apply p-4 bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-400 text-white text-center md:flex  space-y-3;
+        &>img{
+            @apply h-[300px] w-[300px] rounded-md;
+        }
+        &>div{
+            @apply pl-6 md:space-y-3;
+            &>.category{
+                @apply px-2 py-0.5 rounded-md bg-green-500;
+            }
+            &>.user{
+                @apply flex items-center space-x-2;
+                &>img{
+                    @apply w-10 h-10 rounded-full;
+                }
+            }
+            &>h1{
+                @apply text-2xl
+            }
+            &>.blog_details_option{
+                @apply flex justify-between space-x-3;
+                &>p{
+                    @apply flex items-center space-x-2 text-white;
+                }
+            }
+        }
+    }
+    &>.blog_details_details{
+        @apply mx-2 my-5 p-4 bg-white border shadow ;
+    }
+}

@@ -12,6 +12,7 @@
 @import "./admin.css";
 @import "./create_new.css";
 @import "./qna_details.css";
+@import "./blog_details.css";
 
 
 @import "tailwindcss/components";
