@@ -44,11 +44,24 @@ export async function uploadFile(file,setProgress,setUrl,toast){
         })
 }
 
-export async function postBlog(data){
-    console.log("object");
+export async function postBlog(data,router,toast){
     try {
         const res = await axios.post('/api/blog',data)
-        console.log(res.data)
+        if(res.data){
+            router.push('/')
+            toast.success('সফলভাবে')
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getAllBlogPost(setBlogs){
+    try {
+        const res = await axios.get('/api/blog/all')
+        if(res.data){
+            setBlogs(res.data.data)
+        }
     } catch (error) {
         console.log(error);
     }

@@ -1,19 +1,23 @@
-import { doc, setDoc } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../../database/initDatabase";
+
 
 export default async function handler(req,res){
     try {
-        await setDoc (doc(db,'blog_post',req.body.id),req.body)
+        const q = query(collection(db,'blog_post'),orderBy("createdAt", "desc"));
+        const data = await getDocs(q)
+        let blogs =[]
+        data.forEach(doc=> blogs.push(doc.data()))
         res.status(200).json({
             success : true,
             status : 200,
-            message : 'Added successfully'
+            data : blogs
         })
     } catch (error) {
         res.status(500).json({
             success : false,
             status : 500,
-            message : 'Add Failed'
+            message : error.message
         })
     }
 }

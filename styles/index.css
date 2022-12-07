@@ -1,0 +1,13 @@
+.index{
+    @apply mx-4;
+    &>.blog{
+        &>.blog_image{
+            &>img{
+
+            }
+        }
+        &>.blog_details{
+            
+        }
+    }
+}

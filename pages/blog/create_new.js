@@ -1,7 +1,9 @@
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import 'react-quill/dist/quill.snow.css';
+import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { postBlog, uploadFile } from "../../libs/blogHandler";
 import getAllCategory from "../../libs/getAllCategory";
@@ -11,6 +13,8 @@ const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 
 
 export default function CreateNew(){
+    const router = useRouter()
+    const user = useSelector(state=>state.auth.user)
     const [value,setValue] = useState()
     const [categories,setCategories] = useState([])
     const [file,setFile] = useState({})
@@ -18,11 +22,13 @@ export default function CreateNew(){
     const [progress,setProgress] = useState(0)
     const [question,setQuestion] = useState({
         id : uuidv4(),
+        user : user.id,
         category : '',
-        question: '',
-        details : value,
+        title: '',
+        createdAt:Date.now(),
         likes : [],
-        dislikes :[]
+        dislikes :[],
+        views : 0,
     })
 
     const postData = ({...question, image : url, details : value});
@@ -42,7 +48,7 @@ export default function CreateNew(){
                 }
             </select>
 
-            <input type="text" name="question" value={question.question} placeholder="এখানে টাইটেল লিখুন" onChange={(e)=>handleInput(e,question,setQuestion)}/>
+            <input type="text" name="title" value={question.question} placeholder="এখানে টাইটেল লিখুন" onChange={(e)=>handleInput(e,question,setQuestion)}/>
 
             <div className="">
                 <input type="file" name="" onChange={(e)=>setFile(e.target.files[0])}/>
@@ -52,10 +58,10 @@ export default function CreateNew(){
             </div>
 
             <div className="editor">
-                <ReactQuill modules={modules} onChange={setValue} placeholder="পোস্টের বিস্তারিত লিখুন" style={{height:"400px"}}/>
+                <ReactQuill modules={modules} value={value} onChange={setValue} placeholder="পোস্টের বিস্তারিত লিখুন" style={{height:"400px"}}/>
             </div>
 
-            <button onSubmit={()=>postBlog(postData)}>সাবমিট করুন</button>
+            <button onClick={()=>postBlog(postData,router,toast)}>সাবমিট করুন</button>
         </div>
     )
 }
