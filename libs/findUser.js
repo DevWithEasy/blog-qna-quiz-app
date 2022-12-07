@@ -7,7 +7,6 @@ export default async function findUser(id,setUser,toast){
             setUser(res.data.data)
         }
     } catch (error) {
-        toast.error(error.response.data.message);
         console.log(error);
     }
 }

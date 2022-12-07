@@ -77,3 +77,27 @@ export async function getBlogPost(id,setBlog){
         console.log(error);
     }
 }
+
+export async function postBlogComment(data,dispatch,action,setValue,toast){
+    try {
+        const res = await axios.post('/api/blog/comment',data)
+        if(res.data){
+            dispatch(action(Math.random()))
+            setValue("")
+            toast.success('সফলভাবে')
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getAllBlogComment(id,setComments){
+    try {
+        const res = await axios.get(`/api/blog/comment/all/${id}`)
+        if(res.data){
+            setComments(res.data.data)
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
