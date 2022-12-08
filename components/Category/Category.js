@@ -10,7 +10,6 @@ export default function Category({category}){
     useEffect(()=>{
         getSearchAllCategoryBlog(category.name,setData,toast)
     },[category.name])
-    console.log(data);
     return(
         <div className="category">
             <Link key={category.id} href={`/blog/search/category/${category.id}`}><a>

@@ -67,6 +67,17 @@ export async function getAllBlogPost(setBlogs){
     }
 }
 
+export async function getBlogPostPagination(page,setBlogs){
+    try {
+        const res = await axios.get(`/api/blog/pagination/${page}`)
+        if(res.data){
+            setBlogs(res.data.data)
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export async function getBlogPost(id,setBlog){
     try {
         const res = await axios.get(`/api/blog/${id}`)

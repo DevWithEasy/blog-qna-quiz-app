@@ -1,20 +1,24 @@
 import Link from "next/link"
-import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
-import toast from "react-hot-toast"
-import { useDispatch, useSelector } from "react-redux"
-import { allQuestion } from "../store/slice/qnaSlice"
 import {BsFillQuestionDiamondFill} from 'react-icons/bs'
 import SingleQuestion from "../components/SingleQusetion"
-import { getAllQnaQuestion } from "../libs/qnaHandler"
 
-export default function QNA(){
-    const router = useRouter()
-    const dispatch = useDispatch()
-    const questions = useSelector(state=>state.qna.questions)
-    useEffect(()=>{
-        getAllQnaQuestion(dispatch,allQuestion,toast)
-    },[dispatch])
+export async function getServerSideProps({query}){
+    let data
+    try {
+        const res = await fetch(`http:localhost:3000/api/qna/all`)
+        const post = await res.json()
+        data = post.data
+    } catch (error) {
+        console.log(error);
+    }
+    return{
+        props :{
+            questions : data
+        }
+    }
+}
+
+export default function QNA({questions}){
     return(
         <div className="qna">
             <div className="title">

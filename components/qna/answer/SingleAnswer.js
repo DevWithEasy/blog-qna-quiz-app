@@ -19,13 +19,19 @@ export default function SingleAnswer({answer}){
     return(
         <div className="qna_answer_details">
             <div className="qna_answer">
-                <img src={user?.image} alt="" />
                 <div className="answer_details">
-                    <p>
-                        {format(answer.createdAt)} উত্তর প্রদান করেছেন <Link href={`/user/profile/${user.id}`}>
-                            <a >{user.name}</a>
-                        </Link>
-                    </p>
+                    <div className="answer_details_image">
+                        <img src={user?.image} alt="" />
+                        <div>
+                            <p>{format(answer.createdAt)}</p> 
+                            <p>
+                                <span>উত্তর প্রদান করেছেন</span>
+                                <Link href={`/user/profile/${user.id}`}>
+                                    <a >{user.name}</a>
+                                </Link>
+                            </p>
+                        </div>
+                    </div>
                     <hr/>
                     <div className="details">
                         <p className="details" dangerouslySetInnerHTML={{__html: answer?.answer}}></p>

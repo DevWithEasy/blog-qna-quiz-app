@@ -1,128 +1,142 @@
-.qna_details{
-    @apply mx-4 bg-white rounded;
-    &>.qna_question{
-        @apply p-4 flex;
-        &>img{
-            @apply h-16 w-16 rounded-full;
+.qna_details {
+  @apply mx-4 space-y-2 rounded;
+  & > .qna_question {
+    @apply p-2 bg-white flex;
+    & > .question_details {
+      @apply w-full space-y-3;
+      & > .question_details_image {
+        @apply w-full flex items-center space-x-3;
+        & > img {
+          @apply h-16 w-16 rounded-full;
         }
-        &>.question_details{
-            @apply pl-4 w-full space-y-3;
-            &>div{
-                &>p{
-                    &>a{
-                        @apply text-blue-500;
-                    }
-                }
-                &>.question{
-                    @apply text-xl;
-                }
-                &>.details{
-                    @apply pl-8 text-gray-400;
-                }
+        & > div {
+          @apply text-sm;
+          & > p {
+            & > a {
+              @apply text-blue-500;
             }
-            &>button{
-                @apply px-2 py-1 flex items-center space-x-2 bg-slate-600 text-white shadow rounded;
-            }
-            &>.answer{
-                &>.editor{
-                    &>.submit{
-                        @apply space-x-2;
-                        &>button{
-                            @apply px-4 py-1  text-white rounded-md shadow;
-                        }
-                        &>.ok{
-                            @apply bg-green-500;
-                        }
-                        &>.cancel{
-                            @apply bg-red-500;
-                        }
-                    }
-                }
-                &>p{
-                    @apply py-2;
-                    &>a{
-                        @apply underline underline-offset-4 text-blue-500;
-                    }
-                }
-            }
+          }
         }
-    }
-    &>h3{
-        @apply px-4 py-2 mx-4 text-xl bg-green-500 text-white rounded;
-    }
-    &>.qna_answers{
-        @apply p-4 space-y-3;
-        &>.qna_answer_details{
-            @apply border border-gray-100 shadow;
-            &>.qna_answer{
-                @apply flex p-2 rounded;
-                &>img{
-                    @apply h-16 w-16 rounded-full;
-                }
-                &>.answer_details{
-                    @apply w-full space-y-3 pl-4;
-                    &>p{
-                        @apply text-sm text-gray-500;
-                        &>a{
-                            @apply text-blue-500;
-                        }
-                    }
-                    &>.details{
-                        @apply space-y-2;
-                        
-                    }
-                    &>button{
-                        @apply px-2 py-1 flex items-center space-x-2 bg-slate-600 text-white shadow rounded;
-                    }
-                    &>.comment{
-                        &>.editor{
-                            &>.submit{
-                                @apply space-x-2;
-                                &>button{
-                                    @apply px-4 py-1  text-white rounded-md shadow;
-                                }
-                                &>.ok{
-                                    @apply bg-green-500;
-                                }
-                                &>.cancel{
-                                    @apply bg-red-500;
-                                }
-                            }
-                        }
-                        &>p{
-                            @apply py-2;
-                            &>a{
-                                @apply underline underline-offset-4 text-blue-500;
-                            }
-                        }
-                    }
-                }
-            }
-            &>.qna_comments{
-                @apply space-y-3;
-                &>span{
-                    @apply mx-2 px-4 py-1 text-lg bg-gray-200 rounded
-                }
-                &>.qna_comments_details{
-                    @apply p-2;
-                    &>.qna_comment{
-                        @apply flex p-2 rounded;
-                        &>img{
-                            @apply h-12 w-12 rounded-full;
-                        }
-                        &>.comment_details{
-                            @apply w-full pl-4 space-y-2;
-                            &>p{
-                                @apply text-sm text-gray-500;
-                                &>a{
-                                    @apply text-blue-500;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+      }
+      & > .details {
+        & > .question {
+          @apply text-lg;
         }
+        & > .details {
+          @apply text-gray-400;
+        }
+      }
+      & > button {
+        @apply px-2 py-1 flex items-center space-x-2 bg-slate-600 text-white shadow rounded;
+      }
+      & > .answer {
+        & > .editor {
+          & > .submit {
+            @apply space-x-2;
+            & > button {
+              @apply px-4 py-1  text-white rounded-md shadow;
+            }
+            & > .ok {
+              @apply bg-green-500;
+            }
+            & > .cancel {
+              @apply bg-red-500;
+            }
+          }
+        }
+        & > p {
+          @apply py-2;
+          & > a {
+            @apply underline underline-offset-4 text-blue-500;
+          }
+        }
+      }
     }
-
+  }
+  & > h3 {
+    @apply px-4 py-2 text-xl bg-green-500 text-white;
+  }
+  & > .qna_answers {
+    @apply space-y-2;
+    & > .qna_answer_details {
+      @apply bg-white;
+      & > .qna_answer {
+        & > .answer_details {
+          @apply w-full p-2 space-y-3;
+          & > .answer_details_image {
+            @apply flex items-center space-x-2;
+            & > img {
+              @apply h-10 w-10 rounded-full;
+            }
+            & > div {
+              @apply text-xs text-gray-500 space-y-2;
+              & > p {
+                @apply space-x-2;
+                & > a {
+                  @apply text-blue-500;
+                }
+              }
+            }
+          }
+          & > .details {
+            @apply space-y-2;
+          }
+          & > button {
+            @apply px-2 py-1 flex items-center space-x-2 bg-slate-600 text-white shadow rounded;
+          }
+          & > .comment {
+            & > .editor {
+              & > .submit {
+                @apply space-x-2;
+                & > button {
+                  @apply px-4 py-1  text-white rounded-md shadow;
+                }
+                & > .ok {
+                  @apply bg-green-500;
+                }
+                & > .cancel {
+                  @apply bg-red-500;
+                }
+              }
+            }
+            & > p {
+              @apply py-2;
+              & > a {
+                @apply underline underline-offset-4 text-blue-500;
+              }
+            }
+          }
+        }
+      }
+      & > .qna_comments {
+        @apply mt-2 space-y-3;
+        & > span {
+          @apply mx-2 px-4 py-1 text-lg bg-gray-200 rounded;
+        }
+        & > .qna_comments_details {
+          @apply p-3;
+          & > .qna_comment {
+            & > .comment_details {
+              @apply space-y-2;
+              & > .comment_details_image {
+                @apply flex items-center space-x-2;
+                & > img {
+                  @apply h-8 w-8 rounded-full;
+                }
+                & > div {
+                  @apply text-xs text-gray-500 space-y-1;
+                  & > p {
+                    @apply space-x-2;
+                    & > a {
+                      @apply text-blue-500;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

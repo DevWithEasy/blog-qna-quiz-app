@@ -1,7 +1,7 @@
 .index{
     @apply mx-4;
     &>.blog{
-        @apply flex gap-x-2;
+        @apply md:flex md:gap-x-2 space-y-2 md:space-y-0;
         &>.blogs_section{
             @apply w-full md:w-9/12 space-y-2;
             &>h3{
@@ -51,12 +51,12 @@
             }
         }
         &>.categories_section{
-            @apply hidden md:block md:w-3/12 bg-white shadow-md;
+            @apply md:block md:w-3/12;
+            &>h3{
+                @apply p-1.5 text-xl;
+            }
             &>.categories{
-                @apply p-2 space-y-1;
-                &>h3{
-                    @apply px-2 text-xl;
-                }
+                @apply bg-white p-2 space-y-1 shadow-md;
                 &>.category{
                     @apply flex justify-between items-center px-2 py-0.5 hover:bg-gray-100 rounded-md transition-all duration-300;
                     &>a{

@@ -1,9 +1,7 @@
-import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import findUser from "../../../libs/findUser"
-import { getQnaQuestion } from "../../../libs/qnaHandler"
 import { format } from 'timeago.js';
 import {FaCommentAlt} from 'react-icons/fa'
 import Link from "next/link"
@@ -11,18 +9,28 @@ import Head from "next/head"
 import Answer from "../../../components/qna/answer/Answer"
 import Answers from "../../../components/qna/answer/Answers"
 
-export default function QnaDetails(){
-    const router = useRouter()
-    const dispatch = useDispatch()
+export async function getServerSideProps({query}){
+    let data
+    try {
+        const res = await fetch(`http:localhost:3000/api/qna/question/${query.id}`)
+        const post = await res.json()
+        data = post.data
+    } catch (error) {
+        console.log(error);
+    }
+    return{
+        props :{
+            currentQna : data
+        }
+    }
+}
+
+export default function QnaDetails({currentQna}){
     const [answer,setAnswer] = useState(false)
     const auth = useSelector(state=>state.auth.isAuth)
-    const [currentQna,setCurrentQna] = useState({})
     const [user,setUser] = useState({})
     useEffect(()=>{
-        if(router.query.id){getQnaQuestion(router.query.id,setCurrentQna,toast)}
-    },[router.query.id,dispatch])
-    useEffect(()=>{
-        findUser(currentQna.user,setUser,toast)
+        findUser(currentQna?.user,setUser,toast)
     },[currentQna])
     return(
         <div className="qna_details">
@@ -32,17 +40,19 @@ export default function QnaDetails(){
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="qna_question">
-                <img src={user?.image} alt="" />
                 <div className="question_details">
-                    <div className="">
-                        <p>প্রশ্নটি করেছেন : 
-                            <Link href={`/user/profile/${user.id}`}>
-                                <a href=""> {user.name}</a>
-                            </Link>
-                            
-                        </p>
-                        <p>বিভাগ : {currentQna?.category}</p>
-                        <p>প্রশ্নটি করা হয়েছে {format(currentQna.createdAt)}</p>
+                    <div className="question_details_image">
+                        <img src={user?.image} alt="" />
+                        <div className="">
+                            <p>প্রশ্নটি করেছেন : 
+                                <Link href={`/user/profile/${user.id}`}>
+                                    <a href=""> {user.name}</a>
+                                </Link>
+                                
+                            </p>
+                            <p>বিভাগ : {currentQna?.category}</p>
+                            <p>প্রশ্নটি করা হয়েছে {format(currentQna?.createdAt)}</p>
+                        </div>
                     </div>
                     <hr/>
                     <div className="details">

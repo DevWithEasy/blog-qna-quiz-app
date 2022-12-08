@@ -1,20 +1,51 @@
 import Head from "next/head"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import ReactPaginate from "react-paginate"
 import { useSelector } from "react-redux"
 import Blog from "../components/blog/Blog"
 import Categories from "../components/Category/Categories"
-import { getAllBlogPost } from "../libs/blogHandler"
-import getAllCategory from "../libs/getAllCategory"
+import { getAllBlogPost, getBlogPostPagination } from "../libs/blogHandler"
+import getAllCategory from "../libs/getAllCategory";
 
-export default function Home(){
+export async function getServerSideProps(){
+    let blogsData
+    let categories
+    try {
+        //blogs data from server
+        const resBlogs = await fetch(`http:localhost:3000/api/blog/all`)
+        const jsonBlogData = await resBlogs.json()
+        blogsData = jsonBlogData
+
+        //categories data from server
+        const rescategories = await fetch(`http:localhost:3000/api/find/categories`)
+        const jsonCategoriesData = await rescategories.json()
+        categories = jsonCategoriesData.data
+    } catch (error) {
+        console.log(error);
+    }
+    return{
+        props :{
+            blogsData,categories
+        }
+    }
+}
+
+export default function Home({blogsData,categories}){
     const isAuth = useSelector(state=>state.auth.isAuth)
-    const [blogs,setBlogs] = useState([])
-    const [categories,setCategories] = useState([])
+    const {total} = blogsData
+    const [blogs,setBlogs] = useState(blogsData.blogs)
+    const [pageNo,setPageNo] = useState(0)
+    const perPage = 10
+    const totlaPage = Math.ceil(total / perPage)
+    const changePage = ({selected})=>{
+        setPageNo(selected)
+      }
+
     useEffect(()=>{
-        getAllBlogPost(setBlogs)
-        getAllCategory(setCategories)
-    },[])
+        getBlogPostPagination(pageNo,setBlogs)
+    },[pageNo])
+
     return(
         <div className="index">
             <Head>
@@ -29,8 +60,26 @@ export default function Home(){
                     {isAuth && <Link href="/blog/create_new"><a>ব্লগ লিখুন</a></Link>}
                 </h3>
                 {blogs && blogs.map(blog=><Blog key={blog.id} blog={blog}/>)}
+                <div className="blog_pagination">
+                    <ReactPaginate
+                        breakLabel="..."
+                        nextLabel=" >"
+                        onPageChange={changePage}
+                        pageRangeDisplayed={2}
+                        pageCount={totlaPage}
+                        previousLabel="< "
+                        renderOnZeroPageCount={null}
+                        containerClassName="paginate"
+                        previousClassName = "previousBtn"
+                        nextsClassName = "nextBtn"
+                        disabledClassName="disabled"
+                        activeClassName="active"
+                    />
+                    {/* <p>Now you are : ({visitedPages+1}-{visitedPages+perPage}) No. post {pageNo+1}/{totlaPage} pages </p> */}
+                </div>
             </div>
             <div className="categories_section">
+                <h3>বিভাগ সমুহঃ</h3>
                 {categories && <Categories categories={categories}/>}
             </div>
             </div>

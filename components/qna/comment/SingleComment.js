@@ -13,13 +13,19 @@ export default function SingleComment({comment}){
     return(
         <div className="qna_comments_details">
             <div className="qna_comment">
-                <img src={user?.image} alt="" />
                 <div className="comment_details">
-                    <p>
-                        {format(comment.createdAt)}  মন্তব্য করেছেন <Link href={`/user/profile/${user.id}`}>
-                            <a >{user.name}</a>
-                        </Link>
-                    </p>
+                    <div className="comment_details_image">
+                        <img src={user?.image} alt="" />
+                        <div>
+                            <p>{format(comment.createdAt)}</p> 
+                            <p>
+                                <span>মন্তব্য করেছেন</span> 
+                                <Link href={`/user/profile/${user.id}`}>
+                                    <a >{user.name}</a>
+                                </Link>
+                            </p>
+                        </div>
+                    </div>
                     <hr/>
                     <div className="details">
                         <p className="details" dangerouslySetInnerHTML={{__html: comment?.comment}}></p>
