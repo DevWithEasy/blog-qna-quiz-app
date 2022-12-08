@@ -1,11 +1,10 @@
 import Link from "next/link";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaComments } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { format } from "timeago.js";
-import findUser from "../../libs/findUser";
+import findUser from "../../../libs/findUser";
 import Comment from "../comment/Comment";
 import Comments from "../comment/Comments";
 
@@ -40,7 +39,7 @@ export default function SingleAnswer({answer}){
                     
                     {comment && <div className="comment">
                         {auth ? 
-                            <Comment user={user.id} ansId={answer.id} setComment={setComment}/> : 
+                            <Comment ansId={answer.id} setComment={setComment}/> : 
                             <p>
                                 উত্তর দেওয়ার জন্য অনুগহপুর্বক
                                 <Link href="/user/login"><a > লগ-ইন </a></Link>করে নিন। 

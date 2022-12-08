@@ -29,11 +29,11 @@ export async function getAllQnaQuestion(dispatch,action,toast){
 }
 
 
-export async function getQnaQuestion(id,dispatch,action,toast){
+export async function getQnaQuestion(id,setCurrentQna,toast){
     try {
         const res = await axios.get(`/api/qna/question/${id}`)
         if(res.data){
-            dispatch(action(res.data.data))
+            setCurrentQna(res.data.data)
         }
     } catch (error) {
         // toast.error(error.response.data.message)
@@ -103,7 +103,7 @@ export async function getAllComments(id,setComments,toast){
         }
         console.log(res.data);
     }catch(error){
-        toast.error(error.response.data.message);
+        // toast.error(error.response.data.message);
         console.log(error);
     }
 }

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 import { useDispatch, useSelector } from "react-redux"
-import { getAllQnaAnswers } from "../../libs/qnaHandler"
+import { getAllQnaAnswers } from "../../../libs/qnaHandler"
 
 import SingleAnswer from "./SingleAnswer"
+
 
 export default function Answers({id}){
     const dispatch = useDispatch()

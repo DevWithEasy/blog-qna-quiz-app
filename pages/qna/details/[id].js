@@ -4,23 +4,22 @@ import toast from "react-hot-toast"
 import { useDispatch, useSelector } from "react-redux"
 import findUser from "../../../libs/findUser"
 import { getQnaQuestion } from "../../../libs/qnaHandler"
-import { currentQuestion } from "../../../store/slice/qnaSlice"
 import { format } from 'timeago.js';
 import {FaCommentAlt} from 'react-icons/fa'
-import Answer from "../../../components/answer/Answer"
 import Link from "next/link"
-import Answers from "../../../components/answer/Answers"
 import Head from "next/head"
+import Answer from "../../../components/qna/answer/Answer"
+import Answers from "../../../components/qna/answer/Answers"
 
 export default function QnaDetails(){
     const router = useRouter()
     const dispatch = useDispatch()
     const [answer,setAnswer] = useState(false)
     const auth = useSelector(state=>state.auth.isAuth)
-    const currentQna = useSelector(state=>state.qna.currentQna)
+    const [currentQna,setCurrentQna] = useState({})
     const [user,setUser] = useState({})
     useEffect(()=>{
-        if(router.query.id){getQnaQuestion(router.query.id,dispatch,currentQuestion,toast)}
+        if(router.query.id){getQnaQuestion(router.query.id,setCurrentQna,toast)}
     },[router.query.id,dispatch])
     useEffect(()=>{
         findUser(currentQna.user,setUser,toast)
@@ -59,7 +58,7 @@ export default function QnaDetails(){
 
                     {answer && <div className="answer">
                         {auth ? 
-                            <Answer user={user.id} qId={currentQna.id} setAnswer={setAnswer}/> : 
+                            <Answer qId={currentQna.id} setAnswer={setAnswer}/> : 
                             <p>
                                 উত্তর দেওয়ার জন্য অনুগহপুর্বক
                                 <Link href="/user/login"><a > লগ-ইন </a></Link>করে নিন। 

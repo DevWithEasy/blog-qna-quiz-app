@@ -3,18 +3,20 @@ import {v4 as uuidv4} from "uuid";
 import 'react-quill/dist/quill.bubble.css';
 import dynamic from "next/dynamic";
 import toast from "react-hot-toast";
-import { postQnaAnswer } from "../../libs/qnaHandler";
-import { useDispatch } from "react-redux";
-import { refresh } from "../../store/slice/qnaSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+import { postQnaAnswer } from "../../../libs/qnaHandler";
+import { refresh } from "../../../store/slice/qnaSlice";
 const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 
-export default function Answer({user,qId,setAnswer}){
+export default function Answer({qId,setAnswer}){
     const dispatch = useDispatch()
+    const user = useSelector(state=>state.auth.user)
     const [value,setValue] = useState('')
     const answerData = {
         id:uuidv4(),
         qId:qId,
-        user,
+        user : user.id,
         answer:value,
         createdAt:Date.now()
     }

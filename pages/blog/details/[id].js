@@ -96,7 +96,7 @@ export default function BlogDetails(){
 
                     {/* post a comment area */}
                     {comment && <div className="blog_details_comment" id="comment">
-                        <Comment blog={blog} user={user}/>
+                        <Comment blog={blog}/>
                     </div>}
                     
                     {/* all comments area */}

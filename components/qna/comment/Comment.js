@@ -1,20 +1,21 @@
-import { useState } from "react";
-import {v4 as uuidv4} from "uuid";
-import 'react-quill/dist/quill.bubble.css';
 import dynamic from "next/dynamic";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import { postQnaComment } from "../../libs/qnaHandler";
-import { useDispatch } from "react-redux";
-import { refresh } from "../../store/slice/qnaSlice";
+import 'react-quill/dist/quill.bubble.css';
+import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+import { postQnaComment } from "../../../libs/qnaHandler";
+import { refresh } from "../../../store/slice/qnaSlice";
 const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 
-export default function Comment({user,ansId,setComment}){
+export default function Comment({ansId,setComment}){
     const dispatch = useDispatch()
+    const user = useSelector(state=>state.auth.user)
     const [value,setValue] = useState('')
     const commentData = {
         id:uuidv4(),
         ansId:ansId,
-        user,
+        user : user.id,
         comment:value,
         createdAt:Date.now()
     }

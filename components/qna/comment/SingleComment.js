@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { format } from "timeago.js";
-import findUser from "../../libs/findUser";
+import findUser from "../../../libs/findUser";
 
 export default function SingleComment({comment}){
     const [user,setUser] = useState({})
