@@ -52,9 +52,9 @@ export default function CreateNew(){
 
             <div className="">
                 <input type="file" name="" onChange={(e)=>setFile(e.target.files[0])}/>
-                <button onClick={()=>uploadFile(file,setProgress,setUrl,toast)}>আপলোড করুন</button>
+                {file.name && <button onClick={()=>uploadFile(file,setProgress,setUrl,toast)}>আপলোড করুন</button>}
                 {/* {progress < 0 ? `` : progress > 0 ? `uploading`:`complete`} */}
-                <p>{progress}</p>
+                {progress == 100 && <span>আপলোড সফল হয়েছে</span>}
             </div>
 
             <div className="editor">

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -5,6 +6,7 @@ import toast from "react-hot-toast";
 import { AiFillLike, AiOutlineFolderView } from "react-icons/ai";
 import { BiCalendar } from "react-icons/bi";
 import { FaComment } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { format } from "timeago.js";
 import Comment from "../../../components/blog/comment/Comment";
 import Comments from "../../../components/blog/comment/Comments";
@@ -15,9 +17,11 @@ import getSearchAllCategoryBlog from "../../../libs/getSearchAllCategoryBlog";
 
 export default function BlogDetails(){
     const router = useRouter()
+    const [comment,setComment] = useState(false)
     const [blogs,setBlogs] = useState([])
     const [blog,setBlog] = useState({})
     const [user,setUser] = useState({})
+    const refresh = useSelector(state=>state.qna.refresh)
     const [comments,setComments] = useState([])
     useEffect(()=>{
         getBlogPost(router.query.id,setBlog)
@@ -28,9 +32,16 @@ export default function BlogDetails(){
         if(blog.category){getSearchAllCategoryBlog(blog.category,setBlogs,toast)}
         if(blog.category){getAllBlogComment(blog.id,setComments)}
     },[blog])
-    console.log(comments);
+    useEffect(()=>{
+        if(blog.id){getAllBlogComment(blog.id,setComments)}
+    },[blog.id,refresh])
     return(
         <div className="blog_details">
+            <Head>
+                <title>{blog?.title}</title>
+                <meta name="description" content="" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <div className="blog_details_info">
                 <div className="blog_details_image">
                     <img src={blog?.image} alt="blog_image" />
@@ -76,17 +87,17 @@ export default function BlogDetails(){
                                 <AiFillLike/>
                                 <span>লাইক</span>
                             </button>}
-                            <a href="#comment">
+                            <button className="comment" onClick={()=>setComment(!comment)}>
                                 <FaComment/>
                                 <span>মন্তব্য</span>  
-                            </a>
+                            </button>
                         </div>
                     </div>
 
                     {/* post a comment area */}
-                    <div className="blog_details_comment" id="comment">
+                    {comment && <div className="blog_details_comment" id="comment">
                         <Comment blog={blog} user={user}/>
-                    </div>
+                    </div>}
                     
                     {/* all comments area */}
                     <Comments comments={comments}/>
@@ -103,7 +114,7 @@ export default function BlogDetails(){
                             </Link>
                             <p>
                                 <span>{format(blog?.createdAt)}</span>
-                                <span>{comments.length} মন্তব্য</span>
+                                <span className="comment">{comments.length} মন্তব্য</span>
                             </p>
                         </div>)}
                     </div>

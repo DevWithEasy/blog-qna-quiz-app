@@ -12,8 +12,8 @@ export default function SingleComment({comment}){
     },[comment])
     console.log(user);
     return(
-        <div className="qna_comments_details">
-            <div className="qna_comment">
+        <div className="blog_comments_details">
+            <div className="blog_comment">
                 <img src={user?.image} alt="" />
                 <div className="comment_details">
                     <p>

@@ -10,6 +10,7 @@ import {FaCommentAlt} from 'react-icons/fa'
 import Answer from "../../../components/answer/Answer"
 import Link from "next/link"
 import Answers from "../../../components/answer/Answers"
+import Head from "next/head"
 
 export default function QnaDetails(){
     const router = useRouter()
@@ -26,6 +27,11 @@ export default function QnaDetails(){
     },[currentQna])
     return(
         <div className="qna_details">
+            <Head>
+                <title>{currentQna?.question}</title>
+                <meta name="description" content="" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <div className="qna_question">
                 <img src={user?.image} alt="" />
                 <div className="question_details">

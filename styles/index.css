@@ -5,7 +5,13 @@
         &>.blogs_section{
             @apply w-full md:w-9/12 space-y-2;
             &>h3{
-                @apply px-2 text-xl;
+                @apply flex justify-between items-center;
+                &>span{
+                    @apply text-xl;
+                }
+                &>a{
+                    @apply flex items-center space-x-2 px-4 py-1 bg-green-500 text-white rounded-md;
+                }
             }
             &>.blog{
                 @apply flex p-2 bg-white shadow-md;
