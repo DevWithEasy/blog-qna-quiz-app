@@ -21,7 +21,7 @@ export async function getAllQnaQuestion(dispatch,action,toast){
         const res = await axios.get(`/api/qna/all`)
         if(res.data){
             dispatch(action(res.data.data))
-            toast.success("ডাটা লোড হয়েছে")
+            // toast.success("ডাটা লোড হয়েছে")
         }
     }catch(error){
         toast.error(error.response.data.message);
@@ -69,7 +69,7 @@ export async function getAllQnaAnswers(id,setAnswers,toast){
         }
         console.log(res.data);
     }catch(error){
-        toast.error(error.response.data.message);
+        // toast.error(error.response.data.message);
         console.log(error);
     }
 }

@@ -7,11 +7,13 @@ import {AiOutlineFolderView} from "react-icons/ai"
 import {AiFillLike} from "react-icons/ai"
 import { format } from "timeago.js"
 import Link from "next/link"
+import { getAllBlogComment } from "../../libs/blogHandler"
 
 export default function Blog({blog}){
     const [comments,setComments] = useState([])
     const [user,setUser] = useState({})
     useEffect(()=>{
+        getAllBlogComment(blog.id,setComments)
         findUser(blog.user,setUser,toast)
     },[blog])
     return(

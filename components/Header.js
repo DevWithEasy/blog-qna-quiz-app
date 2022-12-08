@@ -11,12 +11,15 @@ export default function Header(){
     const user = useSelector(state=>state.auth.user)
     const dispatch = useDispatch ()
     const [menu,setMenu] = useState(false)
+    function playManu(){
+        setMenu(!menu)
+    }
     return(
         
         <div className="header">
             <Link href="/"><a>ইসলাম.বিডি</a></Link>
             <div className="header_link">
-                <Link href="/"><a>মুলপাতা</a></Link>
+                <Link href="/"><a >মুলপাতা</a></Link>
                 <Link href="/qna"><a>প্রশ্নোত্তর</a></Link>
                 <Link href="/quiz"><a>কুইজ</a></Link>
                 {user?.type ==='admin' && <Link href="/admin"><a>এডমিন</a></Link>}
@@ -31,13 +34,13 @@ export default function Header(){
                 
                 {/* menu option */}
                 {menu && <div className="">
-                    <Link href="/"><a>মুলপাতা</a></Link>
-                    <Link href="/qna"><a>প্রশ্নোত্তর</a></Link>
-                    <Link href="/quiz"><a>কুইজ</a></Link>
-                    {user?.type ==='admin' && <Link href="/admin"><a>এডমিন</a></Link>}
-                    {user.id && <Link href={`/user/profile/${user.id}`}><a>একাউন্ট</a></Link>}
-                    {!user.id && <button className="login" onClick={()=>router.push('/user/login')}>লগ ইন</button>}
-                    {user.id && <button className="logout" onClick={()=>logout(router,dispatch,signout)}>লগ আউট</button>}
+                    <Link href="/"><a onClick={playManu}>মুলপাতা</a></Link>
+                    <Link href="/qna"><a onClick={playManu}>প্রশ্নোত্তর</a></Link>
+                    <Link href="/quiz"><a onClick={playManu}>কুইজ</a></Link>
+                    {user?.type ==='admin' && <Link href="/admin"><a onClick={playManu}>এডমিন</a></Link>}
+                    {user.id && <Link href={`/user/profile/${user.id}`}><a onClick={playManu}>একাউন্ট</a></Link>}
+                    {!user.id && <button className="login" onClick={()=>{router.push('/user/login'),playManu()}}>লগ ইন</button>}
+                    {user.id && <button className="logout" onClick={()=>{logout(router,dispatch,signout),playManu()}}>লগ আউট</button>}
                 </div>}
             </div>
         </div>

@@ -1,12 +1,14 @@
 import Head from "next/head"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 import Blog from "../components/blog/Blog"
 import Categories from "../components/Category/Categories"
 import { getAllBlogPost } from "../libs/blogHandler"
 import getAllCategory from "../libs/getAllCategory"
 
 export default function Home(){
+    const isAuth = useSelector(state=>state.auth.isAuth)
     const [blogs,setBlogs] = useState([])
     const [categories,setCategories] = useState([])
     useEffect(()=>{
@@ -24,7 +26,7 @@ export default function Home(){
             <div className="blogs_section">
                 <h3>
                     <span>সাম্প্রতিক পোস্ট সমুহঃ</span>
-                    <Link href="/blog/create_new"><a>ব্লগ লিখুন</a></Link>
+                    {isAuth && <Link href="/blog/create_new"><a>ব্লগ লিখুন</a></Link>}
                 </h3>
                 {blogs && blogs.map(blog=><Blog key={blog.id} blog={blog}/>)}
             </div>
