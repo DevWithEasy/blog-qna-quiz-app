@@ -5,20 +5,20 @@ import ReactPaginate from "react-paginate"
 import { useSelector } from "react-redux"
 import Blog from "../components/blog/Blog"
 import Categories from "../components/Category/Categories"
-import { getAllBlogPost, getBlogPostPagination } from "../libs/blogHandler"
-import getAllCategory from "../libs/getAllCategory";
+import {  getBlogPostPagination } from "../libs/blogHandler"
+import baseUrl from "../utils/baseUrl"
 
 export async function getServerSideProps(){
     let blogsData
     let categories
     try {
         //blogs data from server
-        const resBlogs = await fetch(`${process.env.VERCEL_URL}/api/blog/all`)
+        const resBlogs = await fetch(`${baseUrl}/api/blog/all`)
         const jsonBlogData = await resBlogs.json()
         blogsData = jsonBlogData
 
         //categories data from server
-        const rescategories = await fetch(`${process.env.VERCEL_URL}/api/find/categories`)
+        const rescategories = await fetch(`${baseUrl}/api/find/categories`)
         const jsonCategoriesData = await rescategories.json()
         categories = jsonCategoriesData.data
     } catch (error) {

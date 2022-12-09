@@ -1,18 +1,19 @@
-import { useEffect, useState } from "react"
-import toast from "react-hot-toast"
-import { useSelector } from "react-redux"
-import findUser from "../../../libs/findUser"
+import Head from "next/head";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { FaCommentAlt } from 'react-icons/fa';
+import { useSelector } from "react-redux";
 import { format } from 'timeago.js';
-import {FaCommentAlt} from 'react-icons/fa'
-import Link from "next/link"
-import Head from "next/head"
-import Answer from "../../../components/qna/answer/Answer"
-import Answers from "../../../components/qna/answer/Answers"
+import Answer from "../../../components/qna/answer/Answer";
+import Answers from "../../../components/qna/answer/Answers";
+import findUser from "../../../libs/findUser";
+import baseUrl from "../../../utils/baseUrl";
 
 export async function getServerSideProps({query}){
     let data
     try {
-        const res = await fetch(`${process.env.VERCEL_URL}/api/qna/question/${query.id}`)
+        const res = await fetch(`${baseUrl}/api/qna/question/${query.id}`)
         const post = await res.json()
         data = post.data
     } catch (error) {

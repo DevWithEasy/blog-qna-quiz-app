@@ -1,11 +1,12 @@
 import Link from "next/link"
 import {BsFillQuestionDiamondFill} from 'react-icons/bs'
 import SingleQuestion from "../components/SingleQusetion"
+import baseUrl from "../utils/baseUrl"
 
-export async function getServerSideProps({query}){
+export async function getServerSideProps(){
     let data
     try {
-        const res = await fetch(`${process.env.VERCEL_URL}/api/qna/all`)
+        const res = await fetch(`${baseUrl}/api/qna/all`)
         const post = await res.json()
         data = post.data
     } catch (error) {
