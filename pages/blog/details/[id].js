@@ -1,40 +1,51 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AiFillLike, AiOutlineFolderView } from "react-icons/ai";
 import { BiCalendar } from "react-icons/bi";
 import { FaComment } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { format } from "timeago.js";
 import Comment from "../../../components/blog/comment/Comment";
 import Comments from "../../../components/blog/comment/Comments";
-import { getAllBlogComment, getBlogPost } from "../../../libs/blogHandler";
+import { getAllBlogComment } from "../../../libs/blogHandler";
 import findUser from "../../../libs/findUser";
 import getSearchAllCategoryBlog from "../../../libs/getSearchAllCategoryBlog";
+import baseUrl from "../../../utils/baseUrl";
 
+export async function getServerSideProps({query}){
+        let  blog
+        try {
+            const blogRes = await fetch(`${baseUrl}/api/blog/${query.id}`)
+            const BlogData = await blogRes.json()
+            blog = BlogData.data
 
-export default function BlogDetails(){
-    const router = useRouter()
+        } catch (error) {
+            console.log(error);
+        }
+    return{
+        props : {blog}
+    }
+}
+
+export default function BlogDetails({blog}){
     const [comment,setComment] = useState(false)
     const [blogs,setBlogs] = useState([])
-    const [blog,setBlog] = useState({})
     const [user,setUser] = useState({})
     const refresh = useSelector(state=>state.qna.refresh)
     const [comments,setComments] = useState([])
-    useEffect(()=>{
-        getBlogPost(router.query.id,setBlog)
-    },[router.query.id])
-
+    
     useEffect(()=>{
         if(blog.user){findUser(blog.user,setUser)}
         if(blog.category){getSearchAllCategoryBlog(blog.category,setBlogs,toast)}
         if(blog.category){getAllBlogComment(blog.id,setComments)}
     },[blog])
+
     useEffect(()=>{
         if(blog.id){getAllBlogComment(blog.id,setComments)}
     },[blog.id,refresh])
+
     return(
         <div className="blog_details">
             <Head>

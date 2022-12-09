@@ -45,7 +45,6 @@ export default function Home({blogsData,categories}){
     useEffect(()=>{
         getBlogPostPagination(pageNo,setBlogs)
     },[pageNo])
-    console.log(blogsData);
     return(
         <div className="index">
             <Head>

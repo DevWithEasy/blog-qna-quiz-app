@@ -1,13 +1,10 @@
 .blog_pagination{
-    @apply py-2;
+    @apply flex justify-center py-2;
     &>.paginate {
         @apply w-3/4 list-none flex justify-center space-x-2;
     }
     &>.paginate a {
-        @apply px-4 py-2 text-xs bg-white shadow-md border cursor-pointer;
-    }
-    &>.paginate a{
-      @apply hover:text-white hover:bg-green-500 transition-all duration-300;
+        @apply px-4 py-2 text-xs bg-white hover:text-white hover:bg-green-300 shadow-md border cursor-pointer transition-all duration-300;
     }
     &>.active a {
       @apply bg-green-500 text-white;

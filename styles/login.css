@@ -1,6 +1,21 @@
 .login{
-    @apply flex justify-center items-center text-white;
-    &>button{
-        @apply flex items-center space-x-2 px-6 py-2 shadow-lg rounded-full bg-slate-500 hover:bg-slate-600 cursor-pointer transition-all duration-300
+    @apply flex justify-center items-center;
+    &>.login_area{
+        @apply mx-4 md:w-1/2 space-y-4 p-4 bg-white rounded-md shadow-md;
+        &>h3{
+            @apply text-2xl  underline underline-offset-2 text-center;
+        }
+        &>p{
+            @apply text-gray-500;
+        }
+        &>div{
+            @apply flex justify-center;
+            &>button{
+                @apply flex items-center space-x-2 px-4 py-1 shadow-lg rounded-full bg-green-500 text-white hover:bg-green-600 cursor-pointer transition-all duration-300
+            }
+        }
+        &>.warning{
+            @apply text-red-500;
+        }
     }
 }

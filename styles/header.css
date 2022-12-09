@@ -6,7 +6,7 @@
     &>.header_link{
         @apply hidden sm:flex space-x-2;
         &>a{
-            @apply p-2 bg-white text-gray-600 rounded-md
+            @apply text-center px-2 py-1 bg-white text-gray-600 rounded-md
         }
         &>.login{
             @apply px-2 py-1 bg-green-500 rounded-md
@@ -23,13 +23,13 @@
         &>div{
             @apply absolute z-10 flex flex-col right-4 w-40 p-2 space-y-2 bg-white text-black  rounded shadow ;
             &>a{
-                @apply p-2 hover:bg-gray-100 rounded-md transition-all duration-300;
+                @apply text-center px-2 py-1 hover:bg-gray-100 rounded-md transition-all duration-300;
             }
             &>.login{
-                @apply px-2 py-1.5 bg-green-500 rounded-md
+                @apply px-2 py-1.5 bg-green-500 text-white rounded-md;
             }
             &>.logout{
-                @apply px-2 py-1.5 bg-red-500 text-white rounded-md
+                @apply px-2 py-1.5 bg-red-500 text-white rounded-md;
             }
         }
     }

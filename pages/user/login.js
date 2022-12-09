@@ -10,10 +10,17 @@ export default function Login() {
     const router = useRouter()
     return (
         <div className='login'>
-            <button onClick={()=>login(router,dispatch,signin)}>
-                <AiFillGoogleCircle size={20}/>
-                <span>গুগল একাউন্ট দিয়ে লগইন</span>
-            </button>
+            <div className="login_area">
+                <h3>লগ-ইন / নিবন্ধন</h3>
+                <p>শুধুমাত্র গুগল একাউন্ট দিয়েই লগ-ইন এবং নিবন্ধন করতে পারবেন । আপনার গুগল একাউন্ট দিয়ে লগ ইন করুন।</p>
+                <div className="">
+                    <button onClick={()=>login(router,dispatch,signin)}>
+                        <AiFillGoogleCircle size={20}/>
+                        <span>গুগল একাউন্ট দিয়ে লগইন</span>
+                    </button>
+                </div>
+                <p className='warning'>ইসলাম.বিডি আপনার অনুমতি ব্যতিত আপনার কোন ব্যক্তিগত তথ্য সংগ্রহ করেনা।</p>
+            </div>
         </div>
     );
 };

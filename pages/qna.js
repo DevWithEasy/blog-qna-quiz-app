@@ -1,5 +1,5 @@
 import Link from "next/link"
-import {BsFillQuestionDiamondFill} from 'react-icons/bs'
+import { useSelector } from "react-redux"
 import SingleQuestion from "../components/SingleQusetion"
 import baseUrl from "../utils/baseUrl"
 
@@ -20,16 +20,16 @@ export async function getServerSideProps(){
 }
 
 export default function QNA({questions}){
+    const isAuth = useSelector(state=>state.auth.isAuth)
     return(
         <div className="qna">
             <div className="title">
                 <h1>সাম্প্রতিক প্রশ্ন ও উত্তর সমুহ</h1>
-                <Link href="/qna/create_new">
+                {isAuth && <Link href="/qna/create_new">
                     <a> 
-                        <BsFillQuestionDiamondFill/>
                         <span>প্রশ্ন করুন</span>
                     </a>
-                </Link>
+                </Link>}
             </div>
             {questions && questions.map(question =><SingleQuestion key={question.id} question={question}/>)}
         </div>
