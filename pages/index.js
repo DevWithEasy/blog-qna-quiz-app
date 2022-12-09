@@ -13,12 +13,12 @@ export async function getServerSideProps(){
     let categories
     try {
         //blogs data from server
-        const resBlogs = await fetch(`http:localhost:3000/api/blog/all`)
+        const resBlogs = await fetch(`${process.env.VERCEL_URL}/api/blog/all`)
         const jsonBlogData = await resBlogs.json()
         blogsData = jsonBlogData
 
         //categories data from server
-        const rescategories = await fetch(`http:localhost:3000/api/find/categories`)
+        const rescategories = await fetch(`${process.env.VERCEL_URL}/api/find/categories`)
         const jsonCategoriesData = await rescategories.json()
         categories = jsonCategoriesData.data
     } catch (error) {

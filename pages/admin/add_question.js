@@ -1,12 +1,12 @@
 import { useEffect } from "react"
 import { useState } from "react"
 import {v4 as uuidv4} from "uuid";
-import addAnswer from "../../libs/addAnswer"
-import addQuestion from "../../libs/addQuestion"
-import getAllCategory from "../../libs/getAllCategory"
-import handleInput from "../../libs/handleInput"
-import removeAnswer from "../../libs/removeAnswer"
 import toast from 'react-hot-toast';
+import getAllCategory from "../../libs/getAllCategory";
+import handleInput from "../../libs/handleInput";
+import removeAnswer from "../../libs/removeAnswer";
+import { addAnswer } from "../../libs/addAnswer";
+import { addQuestion } from "../../libs/addQuestion";
 
 export default function AddQuestion(){
     const [categories,setCategories] = useState([])

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {v4 as uuidv4} from "uuid";
 import toast from 'react-hot-toast';
-import addCategory from "../../libs/addCategory"
+import { addCategory } from "../../libs/addCategory";
 import handleInput from "../../libs/handleInput";
 
 export default function AddCategory(){

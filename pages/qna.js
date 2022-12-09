@@ -5,7 +5,7 @@ import SingleQuestion from "../components/SingleQusetion"
 export async function getServerSideProps({query}){
     let data
     try {
-        const res = await fetch(`http:localhost:3000/api/qna/all`)
+        const res = await fetch(`${process.env.VERCEL_URL}/api/qna/all`)
         const post = await res.json()
         data = post.data
     } catch (error) {

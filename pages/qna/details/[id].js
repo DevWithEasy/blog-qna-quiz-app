@@ -12,7 +12,7 @@ import Answers from "../../../components/qna/answer/Answers"
 export async function getServerSideProps({query}){
     let data
     try {
-        const res = await fetch(`http:localhost:3000/api/qna/question/${query.id}`)
+        const res = await fetch(`${process.env.VERCEL_URL}/api/qna/question/${query.id}`)
         const post = await res.json()
         data = post.data
     } catch (error) {
