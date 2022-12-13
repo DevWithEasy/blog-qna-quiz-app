@@ -1,7 +1,7 @@
 import { signInWithPopup } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import jwt from "jsonwebtoken";
 import { auth, db, provider } from "../database/initDatabase";
-import jwt from "jsonwebtoken"
 
 export default async function login(router,dispatch,action){
     try {
@@ -11,8 +11,8 @@ export default async function login(router,dispatch,action){
             const user = await getDoc(docRef);
 
             if (user.exists()) {
-                // const token = await jwt.sign({id : user.data().id},process.env.NEXT_PUBLIC_JWT_SECRET)
-                // localStorage.setItem(token)
+                const token = await jwt.sign({id : user.data().id},process.env.NEXT_PUBLIC_JWT_SECRET)
+                localStorage.setItem("access_token",token)
                 dispatch(action(user.data()))
                 router.push('/')
             } else {
@@ -26,8 +26,8 @@ export default async function login(router,dispatch,action){
                     createdAt : Date.now(),
                 })
                 const user = await getDoc(docRef);
-                // const token = await jwt.sign({id : user.data().id},process.env.NEXT_PUBLIC_JWT_SECRET)
-                // localStorage.setItem(token)
+                const token = await jwt.sign({id : user.data().id},process.env.NEXT_PUBLIC_JWT_SECRET)
+                localStorage.setItem("access_token",token)
                 dispatch(action(user.data()))
                 router.push('/')
             }
