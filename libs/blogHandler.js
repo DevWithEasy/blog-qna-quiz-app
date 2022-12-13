@@ -112,3 +112,14 @@ export async function getAllBlogComment(id,setComments){
         console.log(error);
     }
 }
+
+export async function getCategoryBlogPostPagination(id,no,setBlogs){
+    try {
+        const res = await axios.post(`/api/blog/search/category/pagination/`,{id,no})
+        if(res.data){
+            setBlogs(res.data.data)
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}

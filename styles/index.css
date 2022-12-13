@@ -1,69 +1,72 @@
-.index{
-    @apply mx-4;
-    &>.blog{
-        @apply md:flex md:gap-x-3 space-y-2 md:space-y-0;
-        &>.blogs_section{
-            @apply w-full md:w-9/12 space-y-2;
-            &>h3{
-                @apply flex justify-between items-center;
-                &>span{
-                    @apply text-xl;
-                }
-                &>a{
-                    @apply flex items-center space-x-2 px-4 py-1 bg-green-500 text-white rounded-md;
-                }
-            }
-            &>.blog{
-                @apply flex p-2 bg-white shadow-md;
-                &>.blog_image{
-                    @apply md:w-[200px] md:h-[120px] flex items-center shrink-0;
-                    &>img{
-                        @apply w-[80px] h-[60px] md:w-[200px] md:h-full;
-                    }
-                }
-                &>.blog_details{
-                    @apply w-full flex flex-col justify-between pl-4 space-y-2;
-                   &>a{
-                    @apply text-blue-500;
-                   }
-                   &>.details_short{
-                    @apply hidden md:block text-gray-400 text-xs;
-                   }
-                   &>.md_options_hide{
-                    @apply md:hidden space-x-2 text-sm;
-                    &>.comments{
-                        @apply text-blue-500;
-                    }
-                   }
-                   &>.blog_details_option{
-                        @apply hidden md:flex justify-between items-center text-gray-500 text-sm;
-                        &>span{
-                            @apply px-2 py-0.5 bg-sky-400 text-white rounded;
-                        }
-                        &>p{
-                            @apply flex items-center space-x-2;
-                            &>img{
-                                @apply w-6 h-6 rounded-full;
-                            }
-                        }
-                   }
-                }
-            }
+.index {
+  @apply mx-4;
+  & > .blog {
+    @apply md:flex md:gap-x-3 space-y-2 md:space-y-0;
+    & > .blogs_section {
+      @apply w-full md:w-9/12 space-y-2;
+      & > h3 {
+        @apply flex justify-between items-center;
+        & > span {
+          @apply text-xl;
         }
-        &>.categories_section{
-            @apply md:block md:w-3/12;
-            &>h3{
-                @apply p-1.5 text-xl;
-            }
-            &>.categories{
-                @apply bg-white p-2 space-y-1 shadow-md;
-                &>.category{
-                    @apply flex justify-between items-center px-2 py-0.5 hover:bg-gray-100 rounded-md transition-all duration-300;
-                    &>a{
-                        @apply flex items-center py-1 space-x-2;
-                    }
-                }
-            }
+        & > a {
+          @apply flex items-center space-x-2 px-4 py-1 bg-green-500 text-white rounded-md;
         }
+      }
+      & > .blog {
+        @apply flex p-2 bg-white shadow-md;
+        & > .blog_image {
+          @apply md:w-[200px] md:h-[120px] flex items-center shrink-0;
+          & > img {
+            @apply w-[80px] h-[60px] md:w-[200px] md:h-full;
+          }
+        }
+        & > .blog_details {
+          @apply w-full flex flex-col justify-between pl-4 space-y-2;
+          & > a {
+            @apply text-blue-500;
+          }
+          & > .details_short {
+            @apply hidden md:block text-gray-400 text-xs;
+          }
+          & > .md_options_hide {
+            @apply md:hidden space-x-2 text-sm;
+            & > .comments {
+              @apply text-blue-500;
+            }
+          }
+          & > .blog_details_option {
+            @apply hidden md:flex justify-between items-center text-gray-500 text-sm;
+            & > span {
+              @apply px-2 py-0.5 bg-sky-400 text-white rounded;
+            }
+            & > p {
+              @apply flex items-center space-x-2;
+              & > img {
+                @apply w-6 h-6 rounded-full;
+              }
+            }
+          }
+        }
+      }
     }
+    & > .categories_section {
+      @apply md:block md:w-3/12;
+      & > h3 {
+        @apply p-1.5 text-xl;
+      }
+      & > .categories {
+        @apply bg-white p-2 space-y-1 shadow-md;
+        & > .category {
+          @apply flex md:justify-between items-center space-x-3 md:space-x-0 px-2 py-0.5 hover:bg-gray-100 transition-all duration-300 border-b;
+          & > a {
+            @apply flex items-center py-1 space-x-2 text-blue-500;
+          }
+          &>span{
+            @apply text-sm;
+          }
+        }
+      }
+    }
+  }
 }

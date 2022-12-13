@@ -11,7 +11,7 @@ import Comment from "../../../components/blog/comment/Comment";
 import Comments from "../../../components/blog/comment/Comments";
 import { getAllBlogComment } from "../../../libs/blogHandler";
 import findUser from "../../../libs/findUser";
-import getSearchAllCategoryBlog from "../../../libs/getSearchAllCategoryBlog";
+import {getSearchAllCategoryBlog} from "../../../libs/getSearchAllCategory";
 import baseUrl from "../../../utils/baseUrl";
 
 export async function getServerSideProps({query}){
@@ -35,10 +35,9 @@ export default function BlogDetails({blog}){
     const [user,setUser] = useState({})
     const refresh = useSelector(state=>state.qna.refresh)
     const [comments,setComments] = useState([])
-    
     useEffect(()=>{
         if(blog.user){findUser(blog.user,setUser)}
-        if(blog.category){getSearchAllCategoryBlog(blog.category,setBlogs,toast)}
+        if(blog.category){getSearchAllCategoryBlog(blog.catId,setBlogs,toast)}
         if(blog.category){getAllBlogComment(blog.id,setComments)}
     },[blog])
 

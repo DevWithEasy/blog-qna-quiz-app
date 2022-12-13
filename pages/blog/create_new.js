@@ -23,7 +23,7 @@ export default function CreateNew(){
     const [question,setQuestion] = useState({
         id : uuidv4(),
         user : user.id,
-        category : '',
+        catId : '',
         title: '',
         createdAt:Date.now(),
         likes : [],
@@ -36,15 +36,14 @@ export default function CreateNew(){
     useEffect(()=>{
         getAllCategory(setCategories)
     },[])
-
     return(
         <div className="create_new">
             <h1>আপনার পোস্ট করুন</h1>
 
-            <select  name="category" value={question.category} onChange={(e)=>handleInput(e,question,setQuestion)}>
+            <select  name="catId" value={question.category} onChange={(e)=>handleInput(e,question,setQuestion)}>
                 <option value="">বিভাগ বাছাই করুন</option>
                 {
-                    categories.length > 0 && categories.map((category,i)=><option key={i} value={category.name}>{category.name}</option>)
+                    categories.length > 0 && categories.map((category,i)=><option key={i} value={category.id}>{category.name}</option>)
                 }
             </select>
 

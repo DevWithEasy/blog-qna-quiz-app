@@ -3,13 +3,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import {FcMediumPriority} from "react-icons/fc"
-import getSearchAllCategoryBlog from "../../libs/getSearchAllCategoryBlog";
+import {getSearchAllCategoryBlogCount} from "../../libs/getSearchAllCategory";
 
 export default function Category({category}){
-    const [data,setData] = useState([])
+    const [data,setData] = useState(0)
     useEffect(()=>{
-        getSearchAllCategoryBlog(category.name,setData,toast)
-    },[category.name])
+        getSearchAllCategoryBlogCount(category.id,setData,toast)
+    },[category.id])
     return(
         <div className="category">
             <Link key={category.id} href={`/blog/search/category/${category.id}`}><a>
@@ -17,7 +17,7 @@ export default function Category({category}){
                 <span>{category.name}</span>
             </a>
             </Link>
-            <span>{data.length}</span>
+            <span>({data})</span>
         </div>
     )
 }

@@ -6,7 +6,7 @@
     &>.paginate a {
         @apply px-4 py-2 text-xs bg-white hover:text-white hover:bg-green-300 shadow-md border cursor-pointer transition-all duration-300;
     }
-    &>.active a {
-      @apply bg-green-500 text-white;
+    &>.paginate .active{
+      @apply text-blue-500 font-extrabold;
     }
 }

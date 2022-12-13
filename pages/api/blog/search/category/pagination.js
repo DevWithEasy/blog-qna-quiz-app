@@ -1,15 +1,15 @@
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import { db } from "../../../../database/initDatabase";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";import { db } from "../../../../../database/initDatabase";
+;
 
 
 export default async function handler(req,res){
     try {
-        const q = query(collection(db,'blog_post'),orderBy("createdAt", "desc"));
+        const q = query(collection(db,'blog_post'),where("catId","==" ,req.body.id),orderBy("createdAt", "desc"));
         const data = await getDocs(q)
         let blogs =[]
         data.forEach(doc=> blogs.push(doc.data()))
 
-        const pageNo = req.query.no
+        const pageNo = req.body.no
         const perPage = 10
         const visitedPages = pageNo * perPage
         const pagedata = blogs.slice(visitedPages,visitedPages+perPage)
