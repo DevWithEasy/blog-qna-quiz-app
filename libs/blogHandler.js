@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ref, uploadBytesResumable,getDownloadURL  } from "firebase/storage";
 import { storage } from "../database/initDatabase";
+import config from "../utils/reqConfig";
 
 export async function uploadFile(file,setProgress,setUrl,toast){
     if(!file) return toast.error('ছবি আপলোড করুন')
@@ -52,6 +53,31 @@ export async function postBlog(data,router,toast){
             toast.success('সফলভাবে')
         }
     } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function deleteBlog(id){
+    try {
+
+    }catch (error) {
+        console.log(error);
+    }
+}
+
+export async function likeBlog(id){
+    const config = {
+        headers :{
+            "access_token" : localStorage.getItem("access_token")
+        }
+    }
+    try {
+        const res = await axios.post(`/api/blog/like/${id}`,{},{
+            headers: {
+                "access_token": localStorage.getItem("access_token")
+            }})
+        console.log(localStorage.getItem("access_token"))
+    }catch (error) {
         console.log(error);
     }
 }

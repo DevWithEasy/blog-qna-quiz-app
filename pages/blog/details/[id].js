@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { format } from "timeago.js";
 import Comment from "../../../components/blog/comment/Comment";
 import Comments from "../../../components/blog/comment/Comments";
-import { getAllBlogComment } from "../../../libs/blogHandler";
+import { getAllBlogComment, likeBlog } from "../../../libs/blogHandler";
 import findUser from "../../../libs/findUser";
 import {getSearchAllCategoryBlog} from "../../../libs/getSearchAllCategory";
 import baseUrl from "../../../utils/baseUrl";
@@ -93,7 +93,7 @@ export default function BlogDetails({blog}){
                             {blog.likes && blog.likes.includes(user.id) ? <button className="dislike">
                                 <AiFillLike/>
                                 <span>আনলাইক</span>
-                            </button> : <button className="like">
+                            </button> : <button onClick={()=>likeBlog(blog.id)} className="like">
                                 <AiFillLike/>
                                 <span>লাইক</span>
                             </button>}

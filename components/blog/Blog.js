@@ -26,7 +26,7 @@ export default function Blog({blog}){
                 <p className="details_short" dangerouslySetInnerHTML={{__html: blog.details.slice(0,100)}}></p>
                 <p className="md_options_hide">
                     <span>{format(blog.createdAt)}</span>
-                    <span className="comments">{blog.likes.length} মন্তব্য</span>
+                    <span className="comments">{comments.length} মন্তব্য</span>
                 </p>
                 <div className="blog_details_option">
                     <span>{blog.category}</span>
