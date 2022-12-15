@@ -1,36 +1,36 @@
-.header{
-    @apply absolute w-full top-0 bg-blue-500 text-white px-5 py-2 flex justify-between items-center shadow-md;
-    &>a{
-        @apply text-2xl;
+.header {
+  @apply absolute w-full top-0 bg-blue-500 text-white px-5 py-2 flex justify-between items-center shadow-md;
+  & > a {
+    @apply text-2xl;
+  }
+  & > .header_link {
+    @apply hidden sm:flex space-x-2;
+    & > a {
+      @apply text-center px-2 py-1 bg-white text-gray-600 rounded-md;
     }
-    &>.header_link{
-        @apply hidden sm:flex space-x-2;
-        &>a{
-            @apply text-center px-2 py-1 bg-white text-gray-600 rounded-md
-        }
-        &>.login{
-            @apply px-2 py-1 bg-green-500 rounded-md
-        }
-        &>.logout{
-            @apply px-2 py-1 bg-red-500 rounded-md
-        }
+    & > .login {
+      @apply px-2 py-1 bg-green-500 rounded-md;
     }
-    &>.header_profile_icon{
-        @apply relative sm:hidden;
-        &>button{
-            @apply h-10 w-10 rounded-full border
-        }
-        &>div{
-            @apply absolute z-10 flex flex-col right-4 w-40 p-2 space-y-2 bg-white text-black  rounded shadow ;
-            &>a{
-                @apply text-center px-2 py-1 hover:bg-gray-100 rounded-md transition-all duration-300;
-            }
-            &>.login{
-                @apply px-2 py-1.5 bg-green-500 text-white rounded-md;
-            }
-            &>.logout{
-                @apply px-2 py-1.5 bg-red-500 text-white rounded-md;
-            }
-        }
+    & > .logout {
+      @apply px-2 py-1 bg-red-500 rounded-md;
     }
+  }
+  & > .header_profile_icon {
+    @apply relative sm:hidden;
+    & > button {
+      @apply h-10 w-10 rounded-full border;
+    }
+    & > div {
+      @apply absolute z-10 flex flex-col right-4 w-40 p-2 space-y-2 bg-white text-black  rounded shadow;
+      & > a {
+        @apply px-2 py-1 hover:bg-gray-100 rounded-md transition-all duration-300;
+      }
+      & > .login {
+        @apply px-2 py-1 bg-green-500 text-white rounded-md;
+      }
+      & > .logout {
+        @apply px-2 py-1 bg-red-500 text-white rounded-md;
+      }
+    }
+  }
 }

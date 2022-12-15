@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import { getBlogPost } from "../../../database/controllers/blogControllers";
+import { getBlogPost, updateBlogPost } from "../../../database/controllers/blogControllers";
 
 export default function handler(req, res) {
   switch (req.method){
@@ -14,7 +14,7 @@ export default function handler(req, res) {
       return res.status(200).json({})
       break;
     case 'PUT':
-      return res.status(200).json({})
+      updateBlogPost(req,res)
       break;
     defaults :
       res.setHeader("Allow",['GET','POST','PUT','DELETE'])

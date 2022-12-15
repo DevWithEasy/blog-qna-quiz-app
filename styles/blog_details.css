@@ -1,6 +1,6 @@
 .blog_details {
   & > .blog_details_info {
-    @apply p-4 bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-400 text-white text-center md:flex  space-y-4;
+    @apply relative p-4 bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-400 text-white text-center md:flex  space-y-4;
     & > .blog_details_image {
       @apply w-full md:w-1/2 flex justify-center;
       & > img {
@@ -68,29 +68,29 @@
           }
         }
       }
-      &>.blog_comments{
+      & > .blog_comments {
         @apply mx-2 space-y-2;
-        &>span{
+        & > span {
           @apply text-xl;
         }
-        &>.blog_comments_details{
+        & > .blog_comments_details {
           @apply p-2 bg-white;
-          &>.blog_comment{
-              @apply flex p-2 rounded;
-              &>img{
-                  @apply h-12 w-12 rounded-full;
+          & > .blog_comment {
+            @apply flex p-2 rounded;
+            & > img {
+              @apply h-12 w-12 rounded-full;
+            }
+            & > .comment_details {
+              @apply w-full pl-4 space-y-2;
+              & > p {
+                @apply text-sm text-gray-500;
+                & > a {
+                  @apply text-blue-500;
+                }
               }
-              &>.comment_details{
-                  @apply w-full pl-4 space-y-2;
-                  &>p{
-                      @apply text-sm text-gray-500;
-                      &>a{
-                          @apply text-blue-500;
-                      }
-                  }
-              }
+            }
           }
-      }
+        }
       }
     }
     & > .category {
@@ -107,7 +107,7 @@
           }
           & > p {
             @apply flex space-x-3 text-xs text-gray-500;
-            &>.comment{
+            & > .comment {
               @apply text-blue-500;
             }
           }

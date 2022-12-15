@@ -1,6 +1,7 @@
 import axios from "axios";
-import { ref, uploadBytesResumable,getDownloadURL  } from "firebase/storage";
-import { storage } from "../database/initDatabase";
+import { doc, getDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { db, storage } from "../database/initDatabase";
 
 export async function uploadFile(file,setUploadStart,setProgress,setUrl,toast){
     if(!file) return toast.error('ছবি আপলোড করুন')
@@ -46,6 +47,18 @@ export async function postBlog(data,router,toast){
 export async function deleteBlog(id){
     try {
 
+    }catch (error) {
+        console.log(error);
+    }
+}
+
+export async function updateBlog(id,postData,router,toast){
+    try {
+        const res = await axios.put(`/api/blog/${id}`,postData)
+        if(res.data){
+            router.push(`/blog/details/${id}`)
+            toast.success(res.data.message)
+        }
     }catch (error) {
         console.log(error);
     }

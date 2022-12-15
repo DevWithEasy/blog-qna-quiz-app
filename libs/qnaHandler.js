@@ -2,14 +2,12 @@ import axios from "axios"
 
 export async function postQnaQuestion(data,router,toast){
     try {
-        if(!data.question || !data.category){
-            toast.error("ক্যাটাগরী অথবা প্রশ্ন লিখেন নি।")
-        }else{
-            const res = await axios.post('/api/qna/question',data)
-            if(res.data){
-                toast.success("সফল ভাবে যুক্ত হয়েছে")
-                router.push("/qna")
-            }
+        if(!data.category) return toast.error("ক্যাটাগরী লিখেন নি।")
+        if(!data.question) return toast.error("প্রশ্ন লিখেন নি।")
+        const res = await axios.post('/api/qna/question',data)
+        if(res.data){
+            toast.success("সফল ভাবে যুক্ত হয়েছে")
+            router.push("/qna")
         }
     } catch (error) {
         toast.error(error.response.data.message)
@@ -21,7 +19,6 @@ export async function getAllQnaQuestion(dispatch,action,toast){
         const res = await axios.get(`/api/qna/all`)
         if(res.data){
             dispatch(action(res.data.data))
-            // toast.success("ডাটা লোড হয়েছে")
         }
     }catch(error){
         toast.error(error.response.data.message);
@@ -43,7 +40,7 @@ export async function getQnaQuestion(id,setCurrentQna,toast){
 
 export async function postQnaAnswer(data,dispatch,action,setAnswer,setValue,toast){
     try {
-        if(!data.user || !data.qId || !data.answer){
+        if(!data.qId || !data.answer){
             toast.error("সবগুলো তথ্য সঠিকভাবে দিন")
         }else{
             const res = await axios.post('/api/qna/answer',data)
@@ -76,7 +73,7 @@ export async function getAllQnaAnswers(id,setAnswers,toast){
 
 export async function postQnaComment(data,dispatch,action,setComment,setValue,toast){
     try {
-        if(!data.user || !data.ansId || !data.comment){
+        if(!data.ansId || !data.comment){
             toast.error("সবগুলো তথ্য সঠিকভাবে দিন")
         }else{
             const res = await axios.post('/api/qna/comment',data)
