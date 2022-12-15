@@ -5,13 +5,14 @@ import toast from "react-hot-toast";
 import { AiFillLike, AiOutlineFolderView } from "react-icons/ai";
 import { BiCalendar } from "react-icons/bi";
 import { FaComment } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { format } from "timeago.js";
 import Comment from "../../../components/blog/comment/Comment";
 import Comments from "../../../components/blog/comment/Comments";
-import { getAllBlogComment, likeBlog } from "../../../libs/blogHandler";
+import { dislikeBlog, getAllBlogComment, likeBlog } from "../../../libs/blogHandler";
 import findUser from "../../../libs/findUser";
 import {getSearchAllCategoryBlog} from "../../../libs/getSearchAllCategory";
+import { currentBlog, dislike, like } from "../../../store/slice/blogSlice";
 import baseUrl from "../../../utils/baseUrl";
 
 export async function getServerSideProps({query}){
@@ -30,21 +31,24 @@ export async function getServerSideProps({query}){
 }
 
 export default function BlogDetails({blog}){
+    const dispatch = useDispatch()
+    const {id} = useSelector(state => state.auth.user)
+    const {likes} = useSelector(state => state.blog.blog)
     const [comment,setComment] = useState(false)
     const [blogs,setBlogs] = useState([])
     const [user,setUser] = useState({})
     const refresh = useSelector(state=>state.qna.refresh)
     const [comments,setComments] = useState([])
     useEffect(()=>{
+        dispatch(currentBlog(blog))
         if(blog.user){findUser(blog.user,setUser)}
         if(blog.category){getSearchAllCategoryBlog(blog.catId,setBlogs,toast)}
         if(blog.category){getAllBlogComment(blog.id,setComments)}
-    },[blog])
+    },[blog,dispatch])
 
     useEffect(()=>{
         if(blog.id){getAllBlogComment(blog.id,setComments)}
     },[blog.id,refresh])
-
     return(
         <div className="blog_details">
             <Head>
@@ -90,10 +94,10 @@ export default function BlogDetails({blog}){
                     <div className="blog_details_details">
                         <p className="details_text" dangerouslySetInnerHTML={{__html: blog.details}}></p>
                         <div className="details_action">
-                            {blog.likes && blog.likes.includes(user.id) ? <button className="dislike">
+                            {likes && likes.includes(id) ? <button onClick={()=>dislikeBlog(blog.id,id,dispatch,dislike)} className="dislike">
                                 <AiFillLike/>
                                 <span>আনলাইক</span>
-                            </button> : <button onClick={()=>likeBlog(blog.id)} className="like">
+                            </button> : <button onClick={()=>likeBlog(blog.id,id,dispatch,like)} className="like">
                                 <AiFillLike/>
                                 <span>লাইক</span>
                             </button>}

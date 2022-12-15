@@ -65,18 +65,29 @@ export async function deleteBlog(id){
     }
 }
 
-export async function likeBlog(id){
-    const config = {
-        headers :{
-            "access_token" : localStorage.getItem("access_token")
-        }
-    }
+export async function likeBlog(id,user,dispatch,action){
     try {
         const res = await axios.post(`/api/blog/like/${id}`,{},{
             headers: {
                 "access_token": localStorage.getItem("access_token")
             }})
-        console.log(localStorage.getItem("access_token"))
+        if(res.data){
+            dispatch(action(user))
+        }
+    }catch (error) {
+        console.log(error);
+    }
+}
+
+export async function dislikeBlog(id,user,dispatch,action){
+    try {
+        const res = await axios.post(`/api/blog/dislike/${id}`,{},{
+            headers: {
+                "access_token": localStorage.getItem("access_token")
+            }})
+            if(res.data){
+                dispatch(action(user))
+            }
     }catch (error) {
         console.log(error);
     }

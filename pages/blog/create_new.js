@@ -27,7 +27,6 @@ export default function CreateNew(){
         title: '',
         createdAt:Date.now(),
         likes : [],
-        dislikes :[],
         views : 0,
     })
 
