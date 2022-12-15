@@ -1,14 +1,10 @@
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../../database/initDatabase";
+import verifyToken from "../../../../utils/verifyToken";
 
-export default async function handler(req,res){
+async function handler(req,res){
     try {
-        if(!req.body.user) return res.status(401).json({
-            success : false,
-            status : 401,
-            message : 'You are not Loged user'
-        })
-        await setDoc (doc(db,'qna_questions',req.body.id),req.body)
+        await setDoc (doc(db,'qna_questions',req.body.id),{...req.body,user : req.user.id})
         res.status(200).json({
             success : true,
             status : 200,
@@ -22,3 +18,4 @@ export default async function handler(req,res){
         })
     }
 }
+export default verifyToken(handler)

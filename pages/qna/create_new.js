@@ -13,12 +13,10 @@ const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 
 export default function CreateNew(){
     const router = useRouter()
-    const user = useSelector(state=>state.auth.user)
     const [value,setValue] = useState()
     const [categories,setCategories] = useState([])
     const [question,setQuestion] = useState({
         id : uuidv4(),
-        user : user.id,
         createdAt: Date.now(),
         category : '',
         question: ''

@@ -19,10 +19,10 @@ export default function CreateNew(){
     const [categories,setCategories] = useState([])
     const [file,setFile] = useState({})
     const [url,setUrl] = useState('')
+    const [uploadStart,setUploadStart] = useState(false)
     const [progress,setProgress] = useState(0)
     const [question,setQuestion] = useState({
         id : uuidv4(),
-        user : user.id,
         catId : '',
         title: '',
         createdAt:Date.now(),
@@ -50,7 +50,12 @@ export default function CreateNew(){
 
             <div className="">
                 <input type="file" name="" onChange={(e)=>setFile(e.target.files[0])}/>
-                {file.name && <button onClick={()=>uploadFile(file,setProgress,setUrl,toast)}>আপলোড করুন</button>}
+                {file.name && progress == 0 && <button onClick={()=>uploadFile(file,setUploadStart,setProgress,setUrl,toast)}>
+                        {!uploadStart ? 'আপলোড করুন' : <div className="flex space-x-1 items-center">
+                            <span className="block w-5 h-5 border-4 border-t-4 border-t-red-500 rounded-full animate-spin"></span>
+                            <span> আপলোড হচ্ছে</span>
+                            </div>}
+                    </button>}
                 {/* {progress < 0 ? `` : progress > 0 ? `uploading`:`complete`} */}
                 {progress == 100 && <span>আপলোড সফল হয়েছে</span>}
             </div>

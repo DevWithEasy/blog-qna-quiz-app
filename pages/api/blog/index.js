@@ -1,7 +1,8 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../../database/initDatabase";
+import verifyToken from "../../../utils/verifyToken";
 
-export default async function handler(req,res){
+async function handler(req,res){
     try {
         const docRef= doc(db,'categories',req.body.catId)
         const category = await getDoc(docRef);
@@ -13,7 +14,7 @@ export default async function handler(req,res){
 
         if(category.exists()){
             const data = category.data();
-            await setDoc (doc(db,'blog_post',req.body.id),{...req.body,category : data.name});
+            await setDoc (doc(db,'blog_post',req.body.id),{...req.body,user : req.user.id,category : data.name});
             res.status(200).json({
                 success : true,
                 status : 200,
@@ -29,3 +30,4 @@ export default async function handler(req,res){
         })
     }
 }
+export default verifyToken(handler);

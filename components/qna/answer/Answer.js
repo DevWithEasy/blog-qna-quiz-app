@@ -16,7 +16,6 @@ export default function Answer({qId,setAnswer}){
     const answerData = {
         id:uuidv4(),
         qId:qId,
-        user : user.id,
         answer:value,
         createdAt:Date.now()
     }

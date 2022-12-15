@@ -1,32 +1,12 @@
 import axios from "axios";
 import { ref, uploadBytesResumable,getDownloadURL  } from "firebase/storage";
 import { storage } from "../database/initDatabase";
-import config from "../utils/reqConfig";
 
-export async function uploadFile(file,setProgress,setUrl,toast){
+export async function uploadFile(file,setUploadStart,setProgress,setUrl,toast){
     if(!file) return toast.error('ছবি আপলোড করুন')
     if(file.size > 1000000) return toast.error('০১ মেগাবাইটের নিচে ছবি আপলোড করুন')
-    // if(file.type === "image/png" || file.type === "image/jpg" || file.type === "image/jepg") {
-    //     const storageRef = ref(storage,`islamBD/blog_post/${file.name}`)
-    //     const uploadTask = uploadBytesResumable(storageRef, file)
-    //     uploadTask.on("state_changed",(snapshot)=>{
-    //         const progress = Math.round(snapshot.bytesTransferred/snapshot.totalBytes) * 100
-    //         setProgress(progress)
-    //     },(error)=>{
-    //         console.log(error);
-    //     },()=>{
-    //         getDownloadURL(uploadTask.snapshot.ref)
-    //         .then(url=>{
-    //             setUrl(url)
-    //         })
-    //         .catch(error=>{
-    //             console.log(error)
-    //         })
-    //     })
 
-    // }else{
-    //     return toast.error('শুধুমাত্র ছবি আপলোড করতে পারবেন।')
-    // }
+    setUploadStart(true)
     const storageRef = ref(storage,`islamBD/blog_post/${file.name}`)
         const uploadTask = uploadBytesResumable(storageRef, file)
         uploadTask.on("state_changed",(snapshot)=>{
@@ -38,6 +18,7 @@ export async function uploadFile(file,setProgress,setUrl,toast){
             getDownloadURL(uploadTask.snapshot.ref)
             .then(url=>{
                 setUrl(url)
+                setUploadStart(false)
             })
             .catch(error=>{
                 console.log(error)
@@ -46,6 +27,11 @@ export async function uploadFile(file,setProgress,setUrl,toast){
 }
 
 export async function postBlog(data,router,toast){
+    const {catId,title,details,image} = data
+    if(!catId) return toast.error('বিভাগ বাছাই করুন ।')
+    if(!title) return toast.error('টাইটেল লিখুন ।')
+    if(!image) return toast.error('ছবি আপলোড করেন নি।')
+    if(!details) return toast.error('কমপক্ষে ৩০০ অক্ষরের পোস্ট করতে হবে।')
     try {
         const res = await axios.post('/api/blog',data)
         if(res.data){

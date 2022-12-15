@@ -10,12 +10,10 @@ const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 
 export default function Comment({blog}){
     const dispatch = useDispatch()
-    const user = useSelector(state=>state.auth.user)
     const [value,setValue] = useState('')
     const commentData = {
         id:uuidv4(),
         postId:blog?.id,
-        user:user?.id,
         comment:value,
         createdAt:Date.now()
     }
