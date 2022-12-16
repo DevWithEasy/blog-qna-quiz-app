@@ -8,10 +8,25 @@
         &>p{
             @apply text-gray-500;
         }
-        &>div{
-            @apply flex justify-center;
-            &>button{
-                @apply flex items-center space-x-2 px-4 py-1 shadow-lg rounded-full bg-green-500 text-white hover:bg-green-600 cursor-pointer transition-all duration-300
+        &>form{
+            @apply space-y-2;
+            &>div{
+                @apply relative;
+                &>input{
+                    @apply w-full p-2 border rounded-md focus:outline-none focus:ring-2;
+                }
+                &>.icon{
+                    @apply absolute right-3 top-3 z-10 text-gray-400
+                }
+            }
+            &>input[type="submit"]{
+                @apply w-full p-2 bg-green-500 rounded-md text-white cursor-pointer;
+            }
+        }
+        &>.link{
+            @apply text-center;
+            &>a{
+                @apply text-blue-500;
             }
         }
         &>.warning{

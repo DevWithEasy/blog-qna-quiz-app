@@ -24,6 +24,18 @@
       & > h1 {
         @apply text-2xl;
       }
+      & > .action {
+        @apply flex justify-center space-x-2;
+        &> button{
+          @apply flex items-center space-x-2;
+        }
+        & > .update{
+          @apply px-2 py-1 bg-green-500 text-white rounded-md shadow shadow-gray-500;
+        }
+        & > .delete{
+          @apply px-2 py-1 bg-red-500 text-white rounded-md shadow shadow-gray-500;
+        }
+      }
       & > .blog_details_option {
         @apply flex justify-between space-x-3;
         & > p {

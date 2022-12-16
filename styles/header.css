@@ -8,6 +8,9 @@
     & > a {
       @apply text-center px-2 py-1 bg-white text-gray-600 rounded-md;
     }
+    & > .new_account {
+      @apply px-2 py-1 bg-pink-500 rounded-md;
+    }
     & > .login {
       @apply px-2 py-1 bg-green-500 rounded-md;
     }

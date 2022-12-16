@@ -1,7 +1,6 @@
 import axios from "axios";
-import { doc, getDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { db, storage } from "../database/initDatabase";
+import { storage } from "../database/initDatabase";
 
 export async function uploadFile(file,setUploadStart,setProgress,setUrl,toast){
     if(!file) return toast.error('ছবি আপলোড করুন')
@@ -44,9 +43,13 @@ export async function postBlog(data,router,toast){
     }
 }
 
-export async function deleteBlog(id){
+export async function deleteBlog(id,router,toast){
     try {
-
+        const res = await axios.delete(`/api/blog/${id}`)
+        if(res.data){
+            router.push(`/`)
+            toast.success(res.data.message)
+        }
     }catch (error) {
         console.log(error);
     }

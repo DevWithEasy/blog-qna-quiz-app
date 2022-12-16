@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import { getBlogPost, updateBlogPost } from "../../../database/controllers/blogControllers";
+import { deleteBlogPost, getBlogPost, updateBlogPost } from "../../../database/controllers/blogControllers";
 
 export default function handler(req, res) {
   switch (req.method){
@@ -11,7 +11,7 @@ export default function handler(req, res) {
       return res.status(200).json({})
       break;
     case 'DELETE':
-      return res.status(200).json({})
+      deleteBlogPost(req,res)
       break;
     case 'PUT':
       updateBlogPost(req,res)

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AiFillLike, AiOutlineFolderView,AiFillDelete } from "react-icons/ai";
@@ -9,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { format } from "timeago.js";
 import Comment from "../../../components/blog/comment/Comment";
 import Comments from "../../../components/blog/comment/Comments";
-import { dislikeBlog, getAllBlogComment, likeBlog } from "../../../libs/blogHandler";
+import { deleteBlog, dislikeBlog, getAllBlogComment, likeBlog } from "../../../libs/blogHandler";
 import findUser from "../../../libs/findUser";
 import {getSearchAllCategoryBlog} from "../../../libs/getSearchAllCategory";
 import { currentBlog, dislike, like } from "../../../store/slice/blogSlice";
@@ -31,6 +32,8 @@ export async function getServerSideProps({query}){
 }
 
 export default function BlogDetails({blog}){
+    const logedUser = useSelector(state => state.auth.user)
+    const router = useRouter()
     const dispatch = useDispatch()
     const {id} = useSelector(state => state.auth.user)
     const {likes} = useSelector(state => state.blog.blog)
@@ -69,6 +72,16 @@ export default function BlogDetails({blog}){
                             <span>{user?.name}</span>
                         </p>
                     </div>
+                    {blog.user == logedUser.id && <div className="action">
+                        <button onClick={()=>router.push(`/blog/update/${blog.id}`)} className='update'>
+                            <FaEdit/>
+                            <span>আপডেট</span>
+                        </button>
+                        <button onClick={()=>deleteBlog(blog.id,router,toast)} className='delete'>
+                            <AiFillDelete/>
+                            <span>ডিলিট</span>
+                        </button>
+                    </div>}
                     <div className="blog_details_option">
                         <p>
                             <BiCalendar/>

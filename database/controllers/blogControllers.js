@@ -1,4 +1,4 @@
-import { doc, getDoc, updateDoc} from "firebase/firestore";
+import { deleteDoc, doc, getDoc, updateDoc} from "firebase/firestore";
 import { db } from "../initDatabase";
 
 export async function getBlogPost(req,res){
@@ -39,6 +39,23 @@ export async function updateBlogPost(req,res){
             success : true,
             status : 200,
             message : "আপডেট হয়েছে"
+        })
+    } catch (error) {
+        res.status(500).json({
+            success : false,
+            status : 500,
+            message : error.message
+        })
+    }
+}
+
+export async function deleteBlogPost(req,res){
+    try {
+        await deleteDoc(doc(db, "blog_post", req.query.id));
+        res.status(200).json({
+            success : true,
+            status : 200,
+            message : "ডিলিট হয়েছে"
         })
     } catch (error) {
         res.status(500).json({

@@ -24,7 +24,8 @@ export default function Header(){
                 <Link href="/quiz"><a>কুইজ</a></Link>
                 {user?.type ==='admin' && <Link href="/admin"><a>এডমিন</a></Link>}
                 {user.id &&  <Link href={`/user/profile/${user.id}`}><a>একাউন্ট</a></Link>}
-                {!user.id && <button className="login" onClick={()=>router.push('/user/login')}>লগ ইন</button>}
+                {!user.id && <button className="new_account" onClick={()=>router.push('/user/signup')}>একাউন্ট করুন</button>}
+                {!user.id && <button className="login" onClick={()=>router.push('/user/signin')}>লগ ইন</button>}
                 {user.id && <button className="logout" onClick={()=>logout(router,dispatch,signout)}>লগ আউট</button>}
             </div>
             <div className="header_profile_icon">
@@ -34,12 +35,13 @@ export default function Header(){
                 
                 {/* menu option */}
                 {menu && <div className="">
+                    {!user.id && <Link href={`/user/signup`}><a onClick={playManu}>একাউন্ট করুন</a></Link>}
                     <Link href="/"><a onClick={playManu}>মুলপাতা</a></Link>
                     <Link href="/qna"><a onClick={playManu}>প্রশ্নোত্তর</a></Link>
                     <Link href="/quiz"><a onClick={playManu}>কুইজ</a></Link>
                     {user?.role ==='admin' && <Link href="/admin"><a onClick={playManu}>এডমিন</a></Link>}
                     {user.id && <Link href={`/user/profile/${user.id}`}><a onClick={playManu}>একাউন্ট</a></Link>}
-                    {!user.id && <button className="login" onClick={()=>{router.push('/user/login'),playManu()}}>লগ ইন</button>}
+                    {!user.id && <button className="login" onClick={()=>{router.push('/user/signin'),playManu()}}>লগ ইন</button>}
                     {user.id && <button className="logout" onClick={()=>{logout(router,dispatch,signout),playManu()}}>লগ আউট</button>}
                 </div>}
             </div>
