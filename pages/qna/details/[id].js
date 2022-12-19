@@ -2,13 +2,15 @@ import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { FaCommentAlt } from 'react-icons/fa';
+import { FaCommentAlt,FaEdit } from 'react-icons/fa';
+import { AiFillDelete } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { format } from 'timeago.js';
 import Answer from "../../../components/qna/answer/Answer";
 import Answers from "../../../components/qna/answer/Answers";
 import findUser from "../../../libs/findUser";
 import baseUrl from "../../../utils/baseUrl";
+import { useRouter } from "next/router";
 
 export async function getServerSideProps({query}){
     let data
@@ -27,6 +29,7 @@ export async function getServerSideProps({query}){
 }
 
 export default function QnaDetails({currentQna}){
+    const router = useRouter()
     const [answer,setAnswer] = useState(false)
     const auth = useSelector(state=>state.auth.isAuth)
     const [user,setUser] = useState({})
@@ -53,6 +56,16 @@ export default function QnaDetails({currentQna}){
                             </p>
                             <p>বিভাগ : {currentQna?.category}</p>
                             <p>প্রশ্নটি করা হয়েছে {format(currentQna?.createdAt)}</p>
+                            <p>
+                                <button className="update" onClick={()=>router.push(`/qna/update/${currentQna.id}`)}>
+                                    <FaEdit/>
+                                    <span>আপডেট</span>
+                                </button>
+                                <button className="delete">
+                                    <AiFillDelete/>
+                                    <span>ডিলিট</span>
+                                </button>
+                            </p>
                         </div>
                     </div>
                     <hr/>

@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
 import toast from 'react-hot-toast';
-import getAllCategory from "../../libs/getAllCategory";
 import {v4 as uuidv4} from "uuid";
-import handleInput from "../../libs/handleInput";
 import 'react-quill/dist/quill.snow.css';
 import dynamic from "next/dynamic";
-import { postQnaQuestion } from "../../libs/qnaHandler";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import modules from "../../utils/editorModule";
+import getAllCategory from "../../../libs/getAllCategory";
+import handleInput from "../../../libs/handleInput";
+import modules from "../../../utils/editorModule";
+import { updateQnaQuestion } from "../../../libs/qnaHandler";
+import baseUrl from "../../../utils/baseUrl";
 const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 
 export async function getServerSideProps({query}){
-    let  blog
+    let  qna
     try {
         const qnaRes = await fetch(`${baseUrl}/api/qna/question/${query.id}`)
         const qnaData = await qnaRes.json()
         qna = qnaData.data
-
     } catch (error) {
         console.log(error);
     }
@@ -28,22 +28,15 @@ return{
 
 export default function CreateNew({qna}){
     const router = useRouter()
-    const [value,setValue] = useState()
+    const [value,setValue] = useState(qna.details)
     const [categories,setCategories] = useState([])
-    const [question,setQuestion] = useState({
-        id : uuidv4(),
-        createdAt: Date.now(),
-        category : '',
-        question: ''
-    })
+    const [question,setQuestion] = useState(qna)
 
     const qnaData = ({...question,details : value});
 
     useEffect(()=>{
         getAllCategory(setCategories)
     },[])
-
-    console.log(qna);
     return(
         <div className="create_new">
             <h1>আপনার প্রশ্ন করুন</h1>
@@ -60,10 +53,11 @@ export default function CreateNew({qna}){
             <div className="editor">
                 <ReactQuill modules={modules}
                 theme="snow"
+                value={value}
                 onChange={setValue} placeholder="আপনার প্রশ্নের বিস্তারিত লিখুন (যদি থাকে)" style={{height:"400px"}}/>
             </div>
 
-            <button onClick={()=>postQnaQuestion(qnaData,router,toast)}>সাবমিট করুন</button>
+            <button onClick={()=>updateQnaQuestion(qna.id,qnaData,router,toast)}>সাবমিট করুন</button>
         </div>
     )
 }

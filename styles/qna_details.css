@@ -5,15 +5,27 @@
     & > .question_details {
       @apply w-full space-y-3;
       & > .question_details_image {
-        @apply w-full flex items-center space-x-3;
+        @apply w-full flex space-x-3;
         & > img {
           @apply h-16 w-16 rounded-full;
         }
         & > div {
-          @apply text-sm;
+          @apply space-y-1 text-sm;
           & > p {
             & > a {
               @apply text-blue-500;
+            }
+          }
+          & > p {
+            @apply flex space-x-1;
+            &> button{
+              @apply flex items-center space-x-1 px-2 py-1 text-white rounded;
+            }
+            & > .update {
+              @apply bg-green-500;
+            }
+            & > .delete {
+              @apply bg-red-500;
             }
           }
         }

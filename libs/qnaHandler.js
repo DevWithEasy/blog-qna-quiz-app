@@ -38,6 +38,18 @@ export async function getQnaQuestion(id,setCurrentQna,toast){
     }
 }
 
+export async function updateQnaQuestion(id,data,router,toast){
+    try {
+        const res = await axios.put(`/api/qna/question/${id}`,data)
+        if(res.data){
+            router.push(`/qna/details/${id}`)
+            toast.success(res.data.message)
+        }
+    }catch (error) {
+        console.log(error);
+    }
+}
+
 export async function postQnaAnswer(data,dispatch,action,setAnswer,setValue,toast){
     try {
         if(!data.qId || !data.answer){
