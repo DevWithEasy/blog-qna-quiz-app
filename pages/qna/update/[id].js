@@ -37,14 +37,15 @@ export default function CreateNew({qna}){
     useEffect(()=>{
         getAllCategory(setCategories)
     },[])
+    console.log(qna);
     return(
         <div className="create_new">
             <h1>আপনার প্রশ্ন করুন</h1>
 
-            <select  name="category" value={question.category} onChange={(e)=>handleInput(e,question,setQuestion)}>
+            <select  name="catId" onChange={(e)=>handleInput(e,question,setQuestion)}>
                 <option value={question.catId}>{question.category}</option>
                 {
-                    categories.length > 0 && categories.map((category,i)=><option key={i} value={category.name}>{category.name}</option>)
+                    categories.length > 0 && categories.map((category,i)=><option key={i} value={category.id}>{category.name}</option>)
                 }
             </select>
 

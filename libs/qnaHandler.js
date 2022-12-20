@@ -2,9 +2,12 @@ import axios from "axios"
 
 export async function postQnaQuestion(data,router,toast){
     try {
-        if(!data.category) return toast.error("ক্যাটাগরী লিখেন নি।")
+        if(!data.catId) return toast.error("ক্যাটাগরী লিখেন নি।")
         if(!data.question) return toast.error("প্রশ্ন লিখেন নি।")
-        const res = await axios.post('/api/qna/question',data)
+        const res = await axios.post('/api/qna/question',data,{
+            headers: {
+                "access_token": localStorage.getItem("access_token")
+            }})
         if(res.data){
             toast.success("সফল ভাবে যুক্ত হয়েছে")
             router.push("/qna")
@@ -74,9 +77,7 @@ export async function getAllQnaAnswers(id,setAnswers,toast){
         if(res.data){
             setAnswers(res.data.data)
             // toast.success("ডাটা লোড হয়েছে")
-            console.log(res.data);
         }
-        console.log(res.data);
     }catch(error){
         // toast.error(error.response.data.message);
         console.log(error);

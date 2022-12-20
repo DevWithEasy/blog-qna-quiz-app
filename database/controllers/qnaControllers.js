@@ -33,14 +33,13 @@ export async function updateQnaQuestion(req,res){
         const docRef= doc(db,'categories',req.body.catId)
         const data = await getDoc(docRef);
         const category = data.data()
-        // const updateRef = doc(db,'qna_questions',req.query.id)
-        // await updateDoc(updateRef,{...req.body,category : category.name})
-        // res.status(200).json({
-        //     success : true,
-        //     status : 200,
-        //     message : "আপডেট হয়েছে"
-        // })
-        console.log(category)
+        const updateRef = doc(db,'qna_questions',req.query.id)
+        await updateDoc(updateRef,{...req.body,category : category.name})
+        res.status(200).json({
+            success : true,
+            status : 200,
+            message : "আপডেট হয়েছে"
+        })
     } catch (error) {
         res.status(500).json({
             success : false,
