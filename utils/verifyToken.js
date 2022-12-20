@@ -8,7 +8,7 @@ export default function verifyToken(handler) {
             status : 403,
             message : "You are not authenticated."
         })
-        jwt.verify(token,process.env.NEXT_PUBLIC_JWT_SECRET,(err,user)=>{
+        jwt.verify(token,process.env.JWT_SECRET,(err,user)=>{
             if(err) return res.status(403).json({
                 success : false,
                 status : 403,
